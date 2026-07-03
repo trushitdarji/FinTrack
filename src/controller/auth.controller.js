@@ -39,6 +39,8 @@ async function RegisterController(req, res) {
   });
 }
 
+async function loginController(req, res) {}
+
 export default {
   RegisterController,
 };
