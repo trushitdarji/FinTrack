@@ -39,7 +39,9 @@ async function RegisterController(req, res) {
   });
 }
 
-async function loginController(req, res) {}
+async function loginController(req, res) {
+  const { email, password } = req.body;
+}
 
 export default {
   RegisterController,
