@@ -8,12 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/auth",authRoute)
+app.use("/api/auth", authRoute);
 
 app.get("/", (req, res) => {
   res.json({ messaege: "FinTrack API is running" });
 });
 
-app.use(errorHandler)
+
+app.use(errorHandler);
 
 export default app;
