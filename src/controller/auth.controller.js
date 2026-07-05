@@ -29,10 +29,10 @@ async function RegisterController(req, res, next) {
       process.env.JWT_SECRET,
     );
 
-    res.cookie("token", token);
+    res.cookie("Token", token);
 
     return res.status(201).json({
-      success:true,
+      success: true,
       user: {
         id: user._id,
         name: user.name,
@@ -40,14 +40,53 @@ async function RegisterController(req, res, next) {
       },
     });
   } catch (err) {
-    next(err)
+    next(err);
   }
 }
 
-async function loginController(req, res) {
-  const { email, password } = req.body;
+async function LoginController(req, res, next) {
+  try {
+    const { email, password } = req.body;
+
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    const isValidPass = await bcrypt.compare(password, user.password);
+
+    if (!isValidPass) {
+      return res.status(400).json({
+        message: "invalid password",
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.JWT_SECRET,
+    );
+
+    res.cookie("Token", token);
+
+    res.status(200).json({
+      success: true,
+      message: "Loggedin Successfully",
+      user: {
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
 }
 
 export default {
   RegisterController,
+  LoginController,
 };
