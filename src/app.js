@@ -14,7 +14,6 @@ app.get("/", (req, res) => {
   res.json({ messaege: "FinTrack API is running" });
 });
 
-
 app.use(errorHandler);
 
 export default app;
