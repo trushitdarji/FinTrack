@@ -12,7 +12,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
 
-app.use("/api/transaction",authMiddleware,transactionRoute)
+app.use("/api",authMiddleware,transactionRoute)
 
 app.get("/", (req, res) => {
   res.json({ messaege: "FinTrack API is running" });
