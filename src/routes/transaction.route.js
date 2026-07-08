@@ -6,5 +6,7 @@ import transactionController from "../controller/transaction.controller.js"
 const transactionRoute = express.Router()
 
 transactionRoute.post("/transaction",authMiddleware,transactionController.AddTransactionController)
+transactionRoute.get("/transaction",authMiddleware,transactionController.FetchTransactionsController)
+
 
 export default transactionRoute

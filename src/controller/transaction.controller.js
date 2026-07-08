@@ -26,6 +26,11 @@ async function AddTransactionController(req, res, next) {
   }
 }
 
+async function FetchTransactionsController(req,res){
+
+}
+
 export default {
   AddTransactionController,
+  FetchTransactionsController
 };
