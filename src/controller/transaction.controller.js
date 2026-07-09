@@ -41,7 +41,40 @@ async function FetchTransactionsController(req, res, next) {
   }
 }
 
+async function FetchTransactionByIdController(req, res, next) {
+  try {
+    const id = req.params.id;
+
+    const userId = req.user._id;
+
+    const transaction = await transactionModel.findById(id);
+
+    if (!transaction) {
+      return res.status(404).json({
+        success: false,
+        message: "Transaction Not Found",
+      });
+    }
+
+    if (transaction.userId.toString() !== userId.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "Forbidden",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Transaction fetched successfully",
+      transaction,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 export default {
   AddTransactionController,
   FetchTransactionsController,
+  FetchTransactionByIdController,
 };

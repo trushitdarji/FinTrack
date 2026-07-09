@@ -7,6 +7,7 @@ const transactionRoute = express.Router()
 
 transactionRoute.post("/transaction",authMiddleware,transactionController.AddTransactionController)
 transactionRoute.get("/transaction",authMiddleware,transactionController.FetchTransactionsController)
+transactionRoute.get("/transaction/:id",authMiddleware,transactionController.FetchTransactionByIdController)
 
 
 export default transactionRoute
