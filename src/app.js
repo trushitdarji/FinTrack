@@ -4,6 +4,7 @@ import authRoute from "./routes/auth.routes.js";
 import errorHandler from "./middleware/error.middleware.js";
 import transactionRoute from "./routes/transaction.route.js";
 import authMiddleware from "./middleware/auth.middleware.js";
+import dashboardRoute from "./routes/dashboard.route.js";
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 
 app.use("/api", transactionRoute);
+
+app.use("/api/dashboard",dashboardRoute);
 
 app.get("/", (req, res) => {
   res.json({ messaege: "FinTrack API is running" });
