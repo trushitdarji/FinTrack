@@ -114,9 +114,40 @@ async function UpdateTransacationController(req, res, next) {
   }
 }
 
+async function DeleteTransactionController(req,res,next){
+  try{
+
+    const id = req.params.id;
+
+    const userId = req.user._id;
+
+    const transaction = await transactionModel.findOneAndDelete({
+      _id:id,
+      userId:userId
+    })
+
+    if(!transaction){
+      return res.status(404).json({
+        success:false,
+        message:"Transaction Not Found or Unauthorized to delete"
+      })
+    }
+
+    return res.status(200).json({
+      success:true,
+      message:"Transaction Deleted Successfully",
+      transaction
+    })
+
+  }catch(err){
+    next(err)
+  }
+}
+
 export default {
   AddTransactionController,
   FetchTransactionsController,
   FetchTransactionByIdController,
   UpdateTransacationController,
+  DeleteTransactionController
 };

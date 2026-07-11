@@ -9,6 +9,7 @@ transactionRoute.post("/transaction",authMiddleware,transactionController.AddTra
 transactionRoute.get("/transaction",authMiddleware,transactionController.FetchTransactionsController)
 transactionRoute.get("/transaction/:id",authMiddleware,transactionController.FetchTransactionByIdController)
 transactionRoute.put("/transaction/:id",authMiddleware,transactionController.UpdateTransacationController)
+transactionRoute.delete("/transaction/:id",authMiddleware,transactionController.DeleteTransactionController)
 
 
 export default transactionRoute
