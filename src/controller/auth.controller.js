@@ -9,7 +9,7 @@ async function RegisterController(req, res, next) {
     const emailExists = await userModel.findOne({ email });
 
     if (emailExists) {
-      return res.status(400).json({
+      return res.status(409).json({
         message: "Email already exists",
       });
     }
