@@ -20,13 +20,30 @@ async function DashboardSummaryController(req, res, next) {
       { income: 0, expense: 0 },
     );
 
-    financialSummary.balance = financialSummary.income - financialSummary.expense
-    financialSummary.totalTransactionLen = transaction.length
+    financialSummary.balance =
+      financialSummary.income - financialSummary.expense;
+    financialSummary.totalTransactionLen = transaction.length;
+
+    return res.status(200).json({
+      success: true,
+      message: "Dashboard Summery fetched",
+      summary: financialSummary,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function RecentController(req, res, next) {
+  try {
+    const userId = req.user._id;
+
+    const recentTransaction = await transactionModel.find({userId}).sort({createdAt:-1}).limit(5)
 
     return res.status(200).json({
       success:true,
-      message:"Dashboard Summery fetched",
-      summary:financialSummary
+      message:"Recent Transaction Fetched Successfully",
+      recentTransaction
     })
 
   } catch (err) {
@@ -36,4 +53,5 @@ async function DashboardSummaryController(req, res, next) {
 
 export default {
   DashboardSummaryController,
+  RecentController,
 };
