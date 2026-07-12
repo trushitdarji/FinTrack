@@ -144,10 +144,42 @@ async function DeleteTransactionController(req,res,next){
   }
 }
 
+
+async function FilterController(req, res, next) {
+  try {
+    const userId = req.user._id;
+
+    const { type, category } = req.query;
+
+    const filter = {
+      userId,
+    };
+
+    if (type) {
+      filter.type = type;
+    }
+
+    if (category) {
+      filter.category = category;
+    }
+
+    const filteredTransactions = await transactionModel.find(filter);
+
+    return res.status(200).json({
+      success: true,
+      message: "Transactions fetched successfully",
+      filteredTransactions,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 export default {
   AddTransactionController,
   FetchTransactionsController,
   FetchTransactionByIdController,
   UpdateTransacationController,
-  DeleteTransactionController
+  DeleteTransactionController,
+  FilterController
 };

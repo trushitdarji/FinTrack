@@ -38,18 +38,21 @@ async function RecentController(req, res, next) {
   try {
     const userId = req.user._id;
 
-    const recentTransaction = await transactionModel.find({userId}).sort({createdAt:-1}).limit(5)
+    const recentTransaction = await transactionModel
+      .find({ userId })
+      .sort({ createdAt: -1 })
+      .limit(5);
 
     return res.status(200).json({
-      success:true,
-      message:"Recent Transaction Fetched Successfully",
-      recentTransaction
-    })
-
+      success: true,
+      message: "Recent Transaction Fetched Successfully",
+      recentTransaction,
+    });
   } catch (err) {
     next(err);
   }
 }
+
 
 export default {
   DashboardSummaryController,
