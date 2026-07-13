@@ -86,7 +86,22 @@ async function LoginController(req, res, next) {
   }
 }
 
+async function LogoutController(req, res, next) {
+  try{
+    res.clearCookie("Token");
+
+    return res.status(200).json({
+      success:true,
+      message:"Logout Successful"
+    })
+
+  }catch(err){
+    next(err)
+  }
+}
+
 export default {
   RegisterController,
   LoginController,
+  LogoutController
 };
