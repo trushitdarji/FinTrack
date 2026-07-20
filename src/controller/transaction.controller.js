@@ -2,6 +2,7 @@ import transactionModel from "../model/transaction.model.js";
 
 async function AddTransactionController(req, res, next) {
   try {
+    console.log("Controller Hit");
     const { title, amount, type, category, date } = req.body;
 
     const userId = req.user._id;
