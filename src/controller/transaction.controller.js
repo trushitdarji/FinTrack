@@ -28,9 +28,10 @@ async function AddTransactionController(req, res, next) {
 async function FetchTransactionsController(req, res, next) {
   try {
     const userId = req.user._id;
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
+    const sort = req.query.sort || "desc";
 
     if (page < 1 || limit < 1) {
       return res.status(400).json({
@@ -39,9 +40,25 @@ async function FetchTransactionsController(req, res, next) {
       });
     }
 
+    if (sort !== "asc" && sort !== "desc") {
+      return res.status(400).json({
+        success: false,
+        message: "Sort must be either 'asc' or 'desc'",
+      });
+    }
+
+    let sortOrder;
+
+    if (sort == "desc") {
+      sortOrder = -1;
+    } else {
+      sortOrder = 1;
+    }
+
     const totalTransactions = await transactionModel.countDocuments({ userId });
     const transactions = await transactionModel
       .find({ userId })
+      .sort({ createdAt: sortOrder })
       .skip(skip)
       .limit(limit);
 
