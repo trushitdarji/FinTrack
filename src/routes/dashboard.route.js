@@ -6,6 +6,7 @@ const dashboardRoute = express.Router();
 
 dashboardRoute.get("/summary",authMiddleware,dashboardController.DashboardSummaryController);
 dashboardRoute.get("/recent",authMiddleware,dashboardController.RecentController);
+dashboardRoute.get("/stats",authMiddleware,dashboardController.DashboardStatsController);
 
 export default dashboardRoute
 

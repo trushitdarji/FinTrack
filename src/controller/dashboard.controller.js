@@ -53,8 +53,34 @@ async function RecentController(req, res, next) {
   }
 }
 
+async function DashboardStatsController(req, rejs, next) {
+  try {
+    const stats = await transactionModel.aggregate([
+      {
+        $match:{
+          userId:userId
+        }
+      },
+      {
+        $group:{
+          _id:"$type",
+          totalAmount :{$sum:"$amount"}
+        }
+      }
+    ])
+
+    return res.status(200).json({
+      success:true,
+      stats
+    })
+
+  } catch (err) {
+    next(err);
+  }
+}
 
 export default {
   DashboardSummaryController,
   RecentController,
+  DashboardStatsController
 };
