@@ -32,6 +32,28 @@ async function FetchTransactionsController(req, res, next) {
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
     const sort = req.query.sort || "desc";
+    const search = req.query.search;
+    const { type, category } = req.query;
+
+    const filter = {
+      userId,
+    };
+
+    if (type) {
+      filter.type = type;
+    }
+
+    if (category) {
+      filter.category = category;
+    }
+
+
+    if (search) {
+      filter.title = {
+        $regex: search,
+        $options: "i",
+      };
+    }
 
     if (page < 1 || limit < 1) {
       return res.status(400).json({
@@ -55,9 +77,9 @@ async function FetchTransactionsController(req, res, next) {
       sortOrder = 1;
     }
 
-    const totalTransactions = await transactionModel.countDocuments({ userId });
+    const totalTransactions = await transactionModel.countDocuments(filter);
     const transactions = await transactionModel
-      .find({ userId })
+      .find(filter)
       .sort({ createdAt: sortOrder })
       .skip(skip)
       .limit(limit);
@@ -181,35 +203,35 @@ async function DeleteTransactionController(req, res, next) {
   }
 }
 
-async function FilterController(req, res, next) {
-  try {
-    const userId = req.user._id;
+// async function FilterController(req, res, next) {
+//   try {
+//     const userId = req.user._id;
 
-    const { type, category } = req.query;
+//     const { type, category } = req.query;
 
-    const filter = {
-      userId,
-    };
+//     const filter = {
+//       userId,
+//     };
 
-    if (type) {
-      filter.type = type;
-    }
+//     if (type) {
+//       filter.type = type;
+//     }
 
-    if (category) {
-      filter.category = category;
-    }
+//     if (category) {
+//       filter.category = category;
+//     }
 
-    const filteredTransactions = await transactionModel.find(filter);
+//     const filteredTransactions = await transactionModel.find(filter);
 
-    return res.status(200).json({
-      success: true,
-      message: "Transactions fetched successfully",
-      filteredTransactions,
-    });
-  } catch (err) {
-    next(err);
-  }
-}
+//     return res.status(200).json({
+//       success: true,
+//       message: "Transactions fetched successfully",
+//       filteredTransactions,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// }
 
 export default {
   AddTransactionController,
@@ -217,5 +239,5 @@ export default {
   FetchTransactionByIdController,
   UpdateTransacationController,
   DeleteTransactionController,
-  FilterController,
+  // FilterController,
 };
