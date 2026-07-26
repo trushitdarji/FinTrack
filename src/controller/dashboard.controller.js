@@ -53,27 +53,39 @@ async function RecentController(req, res, next) {
   }
 }
 
-async function DashboardStatsController(req, rejs, next) {
+async function DashboardStatsController(req, res, next) {
   try {
+    const userId = req.user._id;
     const stats = await transactionModel.aggregate([
       {
-        $match:{
-          userId:userId
-        }
+        $match: {
+          userId: userId,
+        },
       },
       {
-        $group:{
-          _id:"$type",
-          totalAmount :{$sum:"$amount"}
-        }
-      }
-    ])
+        $group: {
+          _id: "$type",
+          totalAmount: { $sum: "$amount" },
+        },
+      },
+    ]);
 
-    return res.status(200).json({
-      success:true,
-      stats
-    })
+    const income = stats.find((item) => item._id === "income");
+    const expense = stats.find((item) => item._id === "expense");
 
+    const totalIncome = income?.totalAmount || 0;
+    const totalExpense = expense?.totalAmount || 0;
+
+    const currBalance = totalIncome - totalExpense;
+
+    return res.status(200).json({ 
+      success: true,
+      summery: {
+        totalIncome,
+        totalExpense,
+        currBalance,
+      },
+    });
   } catch (err) {
     next(err);
   }
@@ -82,5 +94,5 @@ async function DashboardStatsController(req, rejs, next) {
 export default {
   DashboardSummaryController,
   RecentController,
-  DashboardStatsController
+  DashboardStatsController,
 };
