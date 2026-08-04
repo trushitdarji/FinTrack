@@ -77,7 +77,6 @@ async function LoginController(req, res, next) {
     res.status(200).json({
       success: true,
       message: "Loggedin Successfully",
-      token,
       user: {
         name: user.name,
         email: user.email,
@@ -89,21 +88,36 @@ async function LoginController(req, res, next) {
 }
 
 async function LogoutController(req, res, next) {
-  try{
+  try {
     res.clearCookie("Token");
 
     return res.status(200).json({
-      success:true,
-      message:"Logout Successful"
-    })
+      success: true,
+      message: "Logout Successful",
+    });
+  } catch (err) {
+    next(err);
+  }
+}
 
-  }catch(err){
-    next(err)
+async function GetMeController(req, res, next) {
+  try {
+    res.status(200).json({
+      success: true,
+      user: {
+        _id: req.user._id,
+        name: req.user.name,
+        email: req.user.email,
+      },
+    });
+  } catch (err) {
+    next(err);
   }
 }
 
 export default {
   RegisterController,
   LoginController,
-  LogoutController
+  LogoutController,
+  GetMeController,
 };

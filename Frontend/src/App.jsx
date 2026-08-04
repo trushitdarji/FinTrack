@@ -18,7 +18,7 @@ function App() {
             <Dashboard />
           </ProtectedRoute>
         }
-      />
+      />da
     </Routes>
   );
 }

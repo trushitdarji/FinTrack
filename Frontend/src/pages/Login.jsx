@@ -20,7 +20,6 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        localStorage.setItem("token", response.data.token);
         nevigate("/dashboard");
       }
     } catch (err) {
