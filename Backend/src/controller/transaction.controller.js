@@ -5,6 +5,8 @@ async function AddTransactionController(req, res, next) {
     const { title, amount, type, category, date } = req.body;
 
     const userId = req.user._id;
+    console.log(req.body);
+    console.log(req.user);
 
     const transaction = await transactionModel.create({
       title,
@@ -14,6 +16,7 @@ async function AddTransactionController(req, res, next) {
       date,
       userId,
     });
+    console.log(transaction);
 
     return res.status(201).json({
       success: true,
@@ -25,80 +28,79 @@ async function AddTransactionController(req, res, next) {
   }
 }
 
-  async function FetchTransactionsController(req, res, next) {
-    try {
-      const userId = req.user._id;
-      const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 10;
-      const skip = (page - 1) * limit;
-      const sort = req.query.sort || "desc";
-      const search = req.query.search;
-      const { type, category } = req.query;
+async function FetchTransactionsController(req, res, next) {
+  try {
+    const userId = req.user._id;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    const sort = req.query.sort || "desc";
+    const search = req.query.search;
+    const { type, category } = req.query;
 
-      const filter = {
-        userId,
-      };
+    const filter = {
+      userId,
+    };
 
-      if (type) {
-        filter.type = type;
-      }
-
-      if (category) {
-        filter.category = category;
-      }
-
-
-      if (search) {
-        filter.title = {
-          $regex: search,
-          $options: "i",
-        };
-      }
-
-      if (page < 1 || limit < 1) {
-        return res.status(400).json({
-          success: false,
-          message: "Page and limit must be greater than 0",
-        });
-      }
-
-      if (sort !== "asc" && sort !== "desc") {
-        return res.status(400).json({
-          success: false,
-          message: "Sort must be either 'asc' or 'desc'",
-        });
-      }
-
-      let sortOrder;
-
-      if (sort == "desc") {
-        sortOrder = -1;
-      } else {
-        sortOrder = 1;
-      }
-
-      const totalTransactions = await transactionModel.countDocuments(filter);
-      const transactions = await transactionModel
-        .find(filter)
-        .sort({ createdAt: sortOrder })
-        .skip(skip)
-        .limit(limit);
-
-      const totalPages = Math.ceil(totalTransactions / limit);
-
-      return res.status(200).json({
-        success: true,
-        message: "All transactions fetched successfully",
-        transactions,
-        currentPage: page,
-        pageSize: limit,
-        totalPages,
-        totalTransactions,
-      });
-    } catch (err) {
-      next(err);
+    if (type) {
+      filter.type = type;
     }
+
+    if (category) {
+      filter.category = category;
+    }
+
+    if (search) {
+      filter.title = {
+        $regex: search,
+        $options: "i",
+      };
+    }
+
+    if (page < 1 || limit < 1) {
+      return res.status(400).json({
+        success: false,
+        message: "Page and limit must be greater than 0",
+      });
+    }
+
+    if (sort !== "asc" && sort !== "desc") {
+      return res.status(400).json({
+        success: false,
+        message: "Sort must be either 'asc' or 'desc'",
+      });
+    }
+
+    let sortOrder;
+
+    if (sort == "desc") {
+      sortOrder = -1;
+    } else {
+      sortOrder = 1;
+    }
+
+    const totalTransactions = await transactionModel.countDocuments(filter);
+    const transactions = await transactionModel
+      .find(filter)
+      .sort({ createdAt: sortOrder })
+      .skip(skip)
+      .limit(limit);
+
+    const totalPages = Math.ceil(totalTransactions / limit);
+
+    return res.status(200).json({
+      success: true,
+      message: "All transactions fetched successfully",
+      transactions,
+      currentPage: page,
+      pageSize: limit,
+      totalPages,
+      totalTransactions,
+    });
+  } catch (err) {
+    next(err);
   }
+}
 
 async function FetchTransactionByIdController(req, res, next) {
   try {

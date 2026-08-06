@@ -2,10 +2,14 @@ import * as z from "zod";
 
 const transactionSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters long"),
-  amount: z.number().positive("Amount must be positive number"),
+
+  amount: z.coerce.number().positive("Amount must be positive number"),
+
   type: z.enum(["income", "expense"]),
+
   category: z.enum([
     "Food",
+    "Salary",
     "Travel",
     "Shopping",
     "Bills",
@@ -14,6 +18,7 @@ const transactionSchema = z.object({
     "Education",
     "Other",
   ]),
+
   date: z.string(),
 });
 
