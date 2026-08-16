@@ -20,6 +20,30 @@ const Transactions = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this transaction?",
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
+      const response = await api.delete(`/transaction/${id}`);
+
+      if (response.data.success) {
+        alert("Transaction Deleted Successfully");
+
+        setTransactions((prevTransactions) =>
+          prevTransactions.filter((transaction) => transaction._id !== id),
+        );
+      }
+    } catch (err) {
+      console.log(err.response?.data?.message);
+    }
+  };
+
   return (
     <div>
       {transactions.map((transaction) => (
@@ -28,6 +52,7 @@ const Transactions = () => {
           <p>₹{transaction.amount}</p>
           <p>{transaction.type}</p>
           <p>{transaction.category}</p>
+          <button onClick={() => handleDelete(transaction._id)}>Delete</button>
         </div>
       ))}
     </div>

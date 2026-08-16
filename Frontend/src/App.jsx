@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AddTransaction from "./pages/AddTransaction";
 import Transactions from "./pages/Transactions";
+import EditTransaction from "./pages/EditTransaction"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/add-transaction" element={<AddTransaction />} />
       <Route path="/transaction" element={<Transactions />} />
+      <Route path="/transaction/edit/:id" element={<EditTransaction />} />
       <Route
         path="/dashboard"
         element={
