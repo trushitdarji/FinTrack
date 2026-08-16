@@ -8,10 +8,17 @@ const Transactions = () => {
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("desc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit, setLimit] = useState(5);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, type, category, sort]);
 
   useEffect(() => {
     getTransactions();
-  }, [search, type, category, sort]);
+  }, [search, type, category, sort, currentPage, limit]);
 
   const getTransactions = async () => {
     try {
@@ -21,10 +28,13 @@ const Transactions = () => {
           type: type,
           category: category,
           sort: sort,
+          page: currentPage,
+          limit: limit,
         },
       });
       if (response.data.success) {
         setTransactions(response.data.transactions);
+        setTotalPages(response.data.totalPages);
       }
     } catch (err) {
       console.log(err.response?.data?.message);
@@ -61,16 +71,31 @@ const Transactions = () => {
         type="text"
         placeholder="Search transaction..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setCurrentPage(1);
+        }}
       />
 
-      <select value={type} onChange={(e) => setType(e.target.value)}>
+      <select
+        value={type}
+        onChange={(e) => {
+          setType(e.target.value);
+          setCurrentPage(1);
+        }}
+      >
         <option value="">All Types</option>
         <option value="income">Income</option>
         <option value="expense">Expense</option>
       </select>
 
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select
+        value={category}
+        onChange={(e) => {
+          setCategory(e.target.value);
+          setCurrentPage(1);
+        }}
+      >
         <option value="">All Categories</option>
         <option value="Food">Food</option>
         <option value="Salary">Salary</option>
@@ -83,7 +108,13 @@ const Transactions = () => {
         <option value="Other">Other</option>
       </select>
 
-      <select value={sort} onChange={(e) => setSort(e.target.value)}>
+      <select
+        value={sort}
+        onChange={(e) => {
+          setSort(e.target.value);
+          setCurrentPage(1);
+        }}
+      >
         <option value="desc">Newest First</option>
         <option value="asc">Oldest First</option>
       </select>
@@ -97,6 +128,26 @@ const Transactions = () => {
           <button onClick={() => handleDelete(transaction._id)}>Delete</button>
         </div>
       ))}
+
+      <div>
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
+          Previous
+        </button>
+
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
