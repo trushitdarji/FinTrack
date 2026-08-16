@@ -4,14 +4,25 @@ import api from "../api/axios";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
+  const [search, setSearch] = useState("");
+  const [type, setType] = useState("");
+  const [category, setCategory] = useState("");
+  const [sort, setSort] = useState("desc");
 
   useEffect(() => {
     getTransactions();
-  }, []);
+  }, [search, type, category, sort]);
 
   const getTransactions = async () => {
     try {
-      const response = await api.get("/transaction");
+      const response = await api.get("/transaction", {
+        params: {
+          search: search,
+          type: type,
+          category: category,
+          sort: sort,
+        },
+      });
       if (response.data.success) {
         setTransactions(response.data.transactions);
       }
@@ -46,6 +57,37 @@ const Transactions = () => {
 
   return (
     <div>
+      <input
+        type="text"
+        placeholder="Search transaction..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <select value={type} onChange={(e) => setType(e.target.value)}>
+        <option value="">All Types</option>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="">All Categories</option>
+        <option value="Food">Food</option>
+        <option value="Salary">Salary</option>
+        <option value="Travel">Travel</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Bills">Bills</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Health">Health</option>
+        <option value="Education">Education</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <select value={sort} onChange={(e) => setSort(e.target.value)}>
+        <option value="desc">Newest First</option>
+        <option value="asc">Oldest First</option>
+      </select>
+
       {transactions.map((transaction) => (
         <div key={transaction._id}>
           <h3>{transaction.title}</h3>
