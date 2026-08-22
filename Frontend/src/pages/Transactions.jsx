@@ -11,6 +11,7 @@ const Transactions = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(5);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -22,6 +23,8 @@ const Transactions = () => {
 
   const getTransactions = async () => {
     try {
+      setLoading(true);
+
       const response = await api.get("/transaction", {
         params: {
           search: search,
@@ -32,12 +35,15 @@ const Transactions = () => {
           limit: limit,
         },
       });
+
       if (response.data.success) {
         setTransactions(response.data.transactions);
         setTotalPages(response.data.totalPages);
       }
     } catch (err) {
       console.log(err.response?.data?.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -119,15 +125,24 @@ const Transactions = () => {
         <option value="asc">Oldest First</option>
       </select>
 
-      {transactions.map((transaction) => (
-        <div key={transaction._id}>
-          <h3>{transaction.title}</h3>
-          <p>₹{transaction.amount}</p>
-          <p>{transaction.type}</p>
-          <p>{transaction.category}</p>
-          <button onClick={() => handleDelete(transaction._id)}>Delete</button>
-        </div>
-      ))}
+      {loading ? (
+        <p>Loading transactions...</p>
+      ) : transactions.length === 0 ? (
+        <p>No transactions found.</p>
+      ) : (
+        transactions.map((transaction) => (
+          <div key={transaction._id}>
+            <h3>{transaction.title}</h3>
+            <p>₹{transaction.amount}</p>
+            <p>{transaction.type}</p>
+            <p>{transaction.category}</p>
+
+            <button onClick={() => handleDelete(transaction._id)}>
+              Delete
+            </button>
+          </div>
+        ))
+      )}
 
       <div>
         <button
