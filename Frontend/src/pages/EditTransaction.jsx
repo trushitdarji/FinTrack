@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import api from "../api/axios";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditTransaction = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [transaction, setTransaction] = useState(null);
   const [formData, setFormData] = useState({
@@ -51,10 +52,9 @@ const EditTransaction = () => {
     try {
       const response = await api.put(`/transaction/${id}`, formData);
 
-      console.log(response.data);
-
       if (response.data.success) {
         alert("Transaction Updated Successfully");
+        navigate("/transaction");
       }
     } catch (err) {
       console.log(err.response?.data?.message);
@@ -72,19 +72,17 @@ const EditTransaction = () => {
       <h1>Edit Transaction</h1>
 
       <form onSubmit={handleSubmit}>
-        <Input
+        <input
           type="text"
           name="title"
           value={formData.title}
-          placeholder="Enter Title"
           onChange={handleChange}
         />
 
-        <Input
+        <input
           type="number"
           name="amount"
           value={formData.amount}
-          placeholder="Enter Amount"
           onChange={handleChange}
         />
 
@@ -109,14 +107,14 @@ const EditTransaction = () => {
           <option value="Other">Other</option>
         </select>
 
-        <Input
+        <input
           type="date"
           name="date"
           value={formData.date}
           onChange={handleChange}
         />
 
-        <Button text="Update Transaction" />
+        <button type="submit">Update Transaction</button>
       </form>
     </div>
   );

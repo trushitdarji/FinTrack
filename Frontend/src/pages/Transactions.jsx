@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const Transactions = () => {
+  const navigate = useNavigate();
   const [transactions, setTransactions] = useState([]);
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
@@ -146,6 +148,12 @@ const Transactions = () => {
             <p>₹{transaction.amount}</p>
             <p>{transaction.type}</p>
             <p>{transaction.category}</p>
+
+            <button
+              onClick={() => navigate(`/transaction/edit/${transaction._id}`)}
+            >
+              Edit
+            </button>
 
             <button onClick={() => handleDelete(transaction._id)}>
               Delete
