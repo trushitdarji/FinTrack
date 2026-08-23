@@ -12,6 +12,7 @@ const Transactions = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(5);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setCurrentPage(1);
@@ -20,19 +21,19 @@ const Transactions = () => {
   useEffect(() => {
     getTransactions();
   }, [search, type, category, sort, currentPage, limit]);
-
   const getTransactions = async () => {
     try {
       setLoading(true);
+      setError("");
 
       const response = await api.get("/transaction", {
         params: {
-          search: search,
-          type: type,
-          category: category,
-          sort: sort,
+          search,
+          type,
+          category,
+          sort,
           page: currentPage,
-          limit: limit,
+          limit,
         },
       });
 
@@ -42,6 +43,13 @@ const Transactions = () => {
       }
     } catch (err) {
       console.log(err.response?.data?.message);
+
+      setError(
+        err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
+
+      setTransactions([]);
     } finally {
       setLoading(false);
     }
@@ -127,6 +135,8 @@ const Transactions = () => {
 
       {loading ? (
         <p>Loading transactions...</p>
+      ) : error ? (
+        <p>{error}</p>
       ) : transactions.length === 0 ? (
         <p>No transactions found.</p>
       ) : (
