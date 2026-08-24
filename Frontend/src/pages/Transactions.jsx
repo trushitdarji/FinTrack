@@ -56,7 +56,6 @@ const Transactions = () => {
       setLoading(false);
     }
   };
-
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this transaction?",
@@ -72,15 +71,16 @@ const Transactions = () => {
       if (response.data.success) {
         alert("Transaction Deleted Successfully");
 
-        setTransactions((prevTransactions) =>
-          prevTransactions.filter((transaction) => transaction._id !== id),
-        );
+        if (transactions.length === 1 && currentPage > 1) {
+          setCurrentPage((prev) => prev - 1);
+        } else {
+          getTransactions();
+        }
       }
     } catch (err) {
       console.log(err.response?.data?.message);
     }
   };
-
   return (
     <div>
       <input

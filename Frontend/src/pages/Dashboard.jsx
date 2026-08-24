@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import api from "../api/axios";
 import Card from "../components/Card";
 import RecentTransactions from "../components/RecentTransactions";
+import FinancialOverview from "../components/FinancialOverview";
 
 const Dashboard = () => {
   const [summary, setSummary] = useState({});
   const [recentTransactions, setRecentTransactions] = useState([]);
   const [stats, setStats] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const getDashboardSummary = async () => {
     try {
@@ -17,6 +20,7 @@ const Dashboard = () => {
       }
     } catch (err) {
       console.log(err.response?.data?.message);
+      setError(err.response?.data?.message || "Failed to load dashboard.");
     }
   };
 
@@ -43,12 +47,39 @@ const Dashboard = () => {
       console.log(err.response?.data?.message);
     }
   };
-
   useEffect(() => {
-    getDashboardSummary();
-    getRecentTransactions();
-    getDashboardStats();
+    const loadDashboard = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        await Promise.all([
+          getDashboardSummary(),
+          getRecentTransactions(),
+          getDashboardStats(),
+        ]);
+      } catch (err) {
+        setError("Failed to load dashboard.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDashboard();
   }, []);
+
+  if (loading) {
+    return <p>Loading dashboard...</p>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()}>Try Again</button>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -70,25 +101,8 @@ const Dashboard = () => {
       <hr />
 
       <RecentTransactions transactions={recentTransactions} />
-
-      <div>
-        <h2>Financial Overview</h2>
-
-        <div>
-          <h3>Income</h3>
-          <p>₹{stats.totalIncome || 0}</p>
-        </div>
-
-        <div>
-          <h3>Expense</h3>
-          <p>₹{stats.totalExpense || 0}</p>
-        </div>
-
-        <div>
-          <h3>Balance</h3>
-          <p>₹{stats.currBalance || 0}</p>
-        </div>
-      </div>
+      <hr />
+      <FinancialOverview stats={stats} />
     </div>
   );
 };

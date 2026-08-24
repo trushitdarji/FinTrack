@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const EditTransaction = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const [transaction, setTransaction] = useState(null);
   const [formData, setFormData] = useState({
@@ -49,6 +50,39 @@ const EditTransaction = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError("");
+
+    // Validation
+    if (!formData.title.trim()) {
+      setError("Title is required");
+      return;
+    }
+
+    if (formData.title.trim().length < 3) {
+      setError("Title must be at least 3 characters");
+      return;
+    }
+
+    if (!formData.amount || Number(formData.amount) <= 0) {
+      setError("Amount must be greater than 0");
+      return;
+    }
+
+    if (!formData.type) {
+      setError("Please select transaction type");
+      return;
+    }
+
+    if (!formData.category) {
+      setError("Please select a category");
+      return;
+    }
+
+    if (!formData.date) {
+      setError("Please select a date");
+      return;
+    }
+
     try {
       const response = await api.put(`/transaction/${id}`, formData);
 
@@ -58,6 +92,11 @@ const EditTransaction = () => {
       }
     } catch (err) {
       console.log(err.response?.data?.message);
+
+      setError(
+        err.response?.data?.message ||
+          "Failed to update transaction. Please try again.",
+      );
     }
   };
 
@@ -72,6 +111,7 @@ const EditTransaction = () => {
       <h1>Edit Transaction</h1>
 
       <form onSubmit={handleSubmit}>
+        {error && <p className="form-error">{error}</p>}
         <input
           type="text"
           name="title"

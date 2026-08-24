@@ -14,6 +14,7 @@ const AddTransaction = () => {
     date: "",
   });
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -21,9 +22,41 @@ const AddTransaction = () => {
       [e.target.name]: e.target.value,
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setError("");
+
+    // Validation
+    if (!formData.title.trim()) {
+      setError("Title is required");
+      return;
+    }
+
+    if (formData.title.trim().length < 3) {
+      setError("Title must be at least 3 characters");
+      return;
+    }
+
+    if (!formData.amount || Number(formData.amount) <= 0) {
+      setError("Amount must be greater than 0");
+      return;
+    }
+
+    if (!formData.type) {
+      setError("Please select transaction type");
+      return;
+    }
+
+    if (!formData.category) {
+      setError("Please select a category");
+      return;
+    }
+
+    if (!formData.date) {
+      setError("Please select a date");
+      return;
+    }
 
     try {
       const response = await api.post("/transaction", formData);
@@ -34,14 +67,19 @@ const AddTransaction = () => {
       }
     } catch (err) {
       console.log(err.response?.data?.message);
+
+      setError(
+        err.response?.data?.message ||
+          "Failed to add transaction. Please try again.",
+      );
     }
   };
-
   return (
     <div>
       <h1>Add Transaction</h1>
 
       <form onSubmit={handleSubmit}>
+        {error && <p className="form-error">{error}</p>}
         <Input
           type="text"
           name="title"
