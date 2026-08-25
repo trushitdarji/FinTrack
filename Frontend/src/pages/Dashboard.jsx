@@ -3,8 +3,10 @@ import api from "../api/axios";
 import Card from "../components/Card";
 import RecentTransactions from "../components/RecentTransactions";
 import FinancialOverview from "../components/FinancialOverview";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [summary, setSummary] = useState({});
   const [recentTransactions, setRecentTransactions] = useState([]);
   const [stats, setStats] = useState({});
@@ -47,6 +49,19 @@ const Dashboard = () => {
       console.log(err.response?.data?.message);
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      const response = await api.post("/auth/logout");
+
+      if (response.data.success) {
+        navigate("/login");
+      }
+    } catch (err) {
+      console.log(err.response?.data?.message);
+    }
+  };
+
   useEffect(() => {
     const loadDashboard = async () => {
       try {
@@ -84,6 +99,8 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
+
+      <button onClick={handleLogout}>Logout</button>
 
       <div className="dashboard-cards">
         <Card title="Total Income" value={`₹${summary.income || 0}`} />
