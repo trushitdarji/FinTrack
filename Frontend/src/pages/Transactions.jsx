@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import FinancialOverview from "../components/FinancialOverview";
 
 const Transactions = () => {
   const navigate = useNavigate();
@@ -12,17 +13,41 @@ const Transactions = () => {
   const [sort, setSort] = useState("desc");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(8);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [appliedFromDate, setAppliedFromDate] = useState("");
+  const [appliedToDate, setAppliedToDate] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+
+  const [summary, setSummary] = useState({
+    totalIncome: 0,
+    totalExpense: 0,
+    balance: 0,
+    incomePercentage: 0,
+    expensePercentage: 0,
+    totalTransactions: 0,
+  });
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, type, category, sort]);
+  }, [search, type, category, sort, appliedFromDate, appliedToDate]);
 
   useEffect(() => {
     getTransactions();
-  }, [search, type, category, sort, currentPage, limit]);
+    getTransactionSummary();
+  }, [
+    search,
+    type,
+    category,
+    sort,
+    currentPage,
+    limit,
+    appliedFromDate,
+    appliedToDate,
+  ]);
+
   const getTransactions = async () => {
     try {
       setLoading(true);
@@ -36,6 +61,8 @@ const Transactions = () => {
           sort,
           page: currentPage,
           limit,
+          from: appliedFromDate,
+          to: appliedToDate,
         },
       });
 
@@ -54,6 +81,37 @@ const Transactions = () => {
       setTransactions([]);
     } finally {
       setLoading(false);
+    }
+  };
+  const getTransactionSummary = async () => {
+    if (!appliedFromDate || !appliedToDate) {
+      setSummary({
+        totalIncome: 0,
+        totalExpense: 0,
+        balance: 0,
+        incomePercentage: 0,
+        expensePercentage: 0,
+        totalTransactions: 0,
+      });
+
+      return;
+    }
+
+    try {
+      const response = await api.get("/transaction/summary", {
+        params: {
+          from: appliedFromDate,
+          to: appliedToDate,
+        },
+      });
+
+      console.log("SUMMARY:", response.data);
+
+      if (response.data.success) {
+        setSummary(response.data.summary);
+      }
+    } catch (err) {
+      console.log(err.response?.data?.message);
     }
   };
   const handleDelete = async (id) => {
@@ -82,8 +140,9 @@ const Transactions = () => {
     }
   };
   return (
-    <div> 
+    <div>
       <hr />
+
       <input
         type="text"
         placeholder="Search transaction..."
@@ -136,6 +195,46 @@ const Transactions = () => {
         <option value="asc">Oldest First</option>
       </select>
 
+      <div className="date-filter">
+        <div>
+          <label>From</label>
+          <input
+            type="date"
+            value={fromDate}
+            onChange={(e) => setFromDate(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label>To</label>
+          <input
+            type="date"
+            value={toDate}
+            onChange={(e) => setToDate(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <button
+        onClick={() => {
+          if (!fromDate || !toDate) {
+            alert("Please select both From and To dates");
+            return;
+          }
+
+          if (fromDate > toDate) {
+            alert("From date cannot be after To date");
+            return;
+          }
+
+          setCurrentPage(1);
+          setAppliedFromDate(fromDate);
+          setAppliedToDate(toDate);
+        }}
+      >
+        Apply Date Filter
+      </button>
+
       {loading ? (
         <p>Loading transactions...</p>
       ) : error ? (
@@ -143,24 +242,28 @@ const Transactions = () => {
       ) : transactions.length === 0 ? (
         <p>No transactions found.</p>
       ) : (
-        transactions.map((transaction) => (
-          <div key={transaction._id}>
-            <h3>{transaction.title}</h3>
-            <p>₹{transaction.amount}</p>
-            <p>{transaction.type}</p>
-            <p>{transaction.category}</p>
+        <div className="transaction-grid">
+          {transactions.map((transaction) => (
+            <div className="transaction-card" key={transaction._id}>
+              <h3>{transaction.title}</h3>
 
-            <button
-              onClick={() => navigate(`/transaction/edit/${transaction._id}`)}
-            >
-              Edit
-            </button>
+              <p className={transaction.type}>₹{transaction.amount}</p>
 
-            <button onClick={() => handleDelete(transaction._id)}>
-              Delete
-            </button>
-          </div>
-        ))
+              <p>{transaction.type}</p>
+              <p>{transaction.category}</p>
+
+              <button
+                onClick={() => navigate(`/transaction/edit/${transaction._id}`)}
+              >
+                Edit
+              </button>
+
+              <button onClick={() => handleDelete(transaction._id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
       )}
 
       <div>
@@ -182,6 +285,8 @@ const Transactions = () => {
           Next
         </button>
       </div>
+
+      <FinancialOverview stats={summary} />
     </div>
   );
 };

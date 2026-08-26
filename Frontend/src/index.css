@@ -1,3 +1,7 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .dashboard-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -168,13 +172,38 @@
 
   font-size: 1rem;
   font-weight: 500;
-  color: #333333; 
+  color: #333333;
   cursor: pointer;
   text-decoration: underline;
 
   transition: text-decoration 0.2s ease;
 }
 
-.nav-button:hover{
+.nav-button:hover {
   color: blue;
 }
+
+.transaction-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.transaction-card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+@media (max-width: 1024px) {
+  .transaction-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .transaction-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

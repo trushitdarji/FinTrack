@@ -1,4 +1,5 @@
 import transactionModel from "../model/transaction.model.js";
+import mongoose from "mongoose";
 
 async function AddTransactionController(req, res, next) {
   try {
@@ -36,7 +37,14 @@ async function FetchTransactionsController(req, res, next) {
     const skip = (page - 1) * limit;
     const sort = req.query.sort || "desc";
     const search = req.query.search;
-    const { type, category } = req.query;
+    const { type, category, from, to } = req.query;
+
+    if (from && to && from > to) {
+      return res.status(400).json({
+        success: false,
+        message: "From date cannot be greater than To date",
+      });
+    }
 
     const filter = {
       userId,
@@ -55,6 +63,18 @@ async function FetchTransactionsController(req, res, next) {
         $regex: search,
         $options: "i",
       };
+    }
+
+    if (from || to) {
+      filter.date = {};
+
+      if (from) {
+        filter.date.$gte = from;
+      }
+
+      if (to) {
+        filter.date.$lte = to;
+      }
     }
 
     if (page < 1 || limit < 1) {
@@ -204,7 +224,105 @@ async function DeleteTransactionController(req, res, next) {
     next(err);
   }
 }
+async function TransactionSummaryController(req, res, next) {
+  try {
+    const userId = req.user._id;
 
+    const { from, to } = req.query;
+
+    if (!from || !to) {
+      return res.status(400).json({
+        success: false,
+        message: "From date and To date are required",
+      });
+    }
+
+    if (new Date(from) > new Date(to)) {
+      return res.status(400).json({
+        success: false,
+        message: "From date cannot be greater than To date",
+      });
+    }
+
+    const fromDate = new Date(from);
+
+    const toDate = new Date(to);
+
+    // Include the complete To date
+    toDate.setHours(23, 59, 59, 999);
+
+    const summary = await transactionModel.aggregate([
+      {
+        $match: {
+          userId: new mongoose.Types.ObjectId(userId),
+
+          date: {
+            $gte: fromDate,
+            $lte: toDate,
+          },
+        },
+      },
+
+      {
+        $group: {
+          _id: "$type",
+
+          total: {
+            $sum: "$amount",
+          },
+
+          count: {
+            $sum: 1,
+          },
+        },
+      },
+    ]);
+
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let incomeCount = 0;
+    let expenseCount = 0;
+
+    summary.forEach((item) => {
+      if (item._id === "income") {
+        totalIncome = item.total;
+        incomeCount = item.count;
+      }
+
+      if (item._id === "expense") {
+        totalExpense = item.total;
+        expenseCount = item.count;
+      }
+    });
+
+    const totalAmount = totalIncome + totalExpense;
+
+    const incomePercentage =
+      totalAmount > 0
+        ? Number(((totalIncome / totalAmount) * 100).toFixed(2))
+        : 0;
+
+    const expensePercentage =
+      totalAmount > 0
+        ? Number(((totalExpense / totalAmount) * 100).toFixed(2))
+        : 0;
+
+    return res.status(200).json({
+      success: true,
+
+      summary: {
+        totalIncome,
+        totalExpense,
+        balance: totalIncome - totalExpense,
+        incomePercentage,
+        expensePercentage,
+        totalTransactions: incomeCount + expenseCount,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+}
 // async function FilterController(req, res, next) {
 //   try {
 //     const userId = req.user._id;
@@ -242,4 +360,5 @@ export default {
   UpdateTransacationController,
   DeleteTransactionController,
   // FilterController,
+  TransactionSummaryController,
 };
