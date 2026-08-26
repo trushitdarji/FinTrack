@@ -8,6 +8,7 @@ const EditTransaction = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [transaction, setTransaction] = useState(null);
   const [formData, setFormData] = useState({
@@ -84,6 +85,7 @@ const EditTransaction = () => {
     }
 
     try {
+      setLoading(true);
       const response = await api.put(`/transaction/${id}`, formData);
 
       if (response.data.success) {
@@ -97,6 +99,8 @@ const EditTransaction = () => {
         err.response?.data?.message ||
           "Failed to update transaction. Please try again.",
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -154,7 +158,10 @@ const EditTransaction = () => {
           onChange={handleChange}
         />
 
-        <button type="submit">Update Transaction</button>
+        <Button
+          text={loading ? "Updating..." : "Update Transaction"}
+          disabled={loading}
+        />
       </form>
     </div>
   );

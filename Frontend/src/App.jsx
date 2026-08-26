@@ -7,6 +7,7 @@ import AddTransaction from "./pages/AddTransaction";
 import Transactions from "./pages/Transactions";
 import EditTransaction from "./pages/EditTransaction";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -42,6 +43,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }
       />

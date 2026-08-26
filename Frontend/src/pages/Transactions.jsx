@@ -82,7 +82,8 @@ const Transactions = () => {
     }
   };
   return (
-    <div>
+    <div> 
+      <hr />
       <input
         type="text"
         placeholder="Search transaction..."

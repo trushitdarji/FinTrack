@@ -15,6 +15,7 @@ const AddTransaction = () => {
   });
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -59,6 +60,8 @@ const AddTransaction = () => {
     }
 
     try {
+      setLoading(true);
+
       const response = await api.post("/transaction", formData);
 
       if (response.data.success) {
@@ -72,8 +75,11 @@ const AddTransaction = () => {
         err.response?.data?.message ||
           "Failed to add transaction. Please try again.",
       );
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <div>
       <h1>Add Transaction</h1>
@@ -132,7 +138,10 @@ const AddTransaction = () => {
           onChange={handleChange}
         />
 
-        <Button text="Add Transaction" />
+        <Button
+          text={loading ? "Adding..." : "Add Transaction"}
+          disabled={loading}
+        />
       </form>
     </div>
   );

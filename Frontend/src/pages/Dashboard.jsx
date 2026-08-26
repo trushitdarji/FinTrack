@@ -100,8 +100,6 @@ const Dashboard = () => {
     <div>
       <h1>Dashboard</h1>
 
-      <button onClick={handleLogout}>Logout</button>
-
       <div className="dashboard-cards">
         <Card title="Total Income" value={`₹${summary.income || 0}`} />
 
