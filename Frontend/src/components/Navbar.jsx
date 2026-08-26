@@ -5,33 +5,22 @@ import api from "../api/axios";
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      const response = await api.post("/auth/logout");
-
-      if (response.data.success) {
-        navigate("/login");
-      }
-    } catch (err) {
-      console.log(err.response?.data?.message);
-    }
-  };
-
   return (
-    <nav>
-      <h2 onClick={() => navigate("/dashboard")}>💰 FinTrack</h2>
-
+    <nav className="navbar">
       <div>
-        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+        <h2 onClick={() => navigate("/dashboard")}>💰 FinTrack</h2>
+      </div>
 
-        <button onClick={() => navigate("/transaction")}>Transactions</button>
+      <div className="options">
+        <button className="nav-button" onClick={() => navigate("/dashboard")}>Dashboard</button>
 
-        <button onClick={() => navigate("/add-transaction")}>
+        <button className="nav-button" onClick={() => navigate("/transaction")}>Transactions</button>
+
+        <button className="nav-button" onClick={() => navigate("/add-transaction")}>
           Add Transaction
         </button>
 
-        <button onClick={handleLogout}>Logout</button>
-        <button onClick={() => navigate("/profile")}>Profile</button>
+        <button className="nav-button" onClick={() => navigate("/profile")}>Profile</button>
       </div>
     </nav>
   );

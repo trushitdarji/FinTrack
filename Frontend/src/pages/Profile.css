@@ -1,0 +1,533 @@
+/* =====================================
+   PROFILE PAGE ONLY
+===================================== */
+
+.profile-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background: #ffffff;
+  color: #111111;
+
+  transition: 0.3s ease;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  box-sizing: border-box;
+}
+
+/* Only elements INSIDE profile page */
+
+.profile-page *,
+.profile-page *::before,
+.profile-page *::after {
+  box-sizing: border-box;
+}
+
+/* =====================================
+   TOP PURPLE HEADER
+===================================== */
+
+.profile-page .profile-header {
+  height: 260px;
+
+  background: #c5bdf7;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* =====================================
+   PROFILE IMAGE
+===================================== */
+
+.profile-page .avatar-wrapper {
+  position: absolute;
+
+  bottom: -65px;
+
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  padding: 3px;
+
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+
+  z-index: 5;
+}
+
+.profile-page .profile-avatar {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  display: block;
+}
+
+/* =====================================
+   PROFILE CONTAINER
+===================================== */
+
+.profile-page .profile-container {
+  width: 100%;
+
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  padding-top: 85px;
+  padding-bottom: 50px;
+}
+
+/* =====================================
+   USER INFORMATION
+===================================== */
+
+.profile-page .user-info {
+  padding: 0 35px 30px;
+}
+
+.profile-page .user-info h1 {
+  text-align: center;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  margin: 0 0 28px 0;
+}
+
+.profile-page .info-row {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 9px 0;
+}
+
+.profile-page .info-label {
+  font-size: 18px;
+
+  color: #777777;
+
+  font-weight: 400;
+}
+
+.profile-page .info-value {
+  font-size: 18px;
+
+  color: #111111;
+
+  max-width: 70%;
+
+  text-align: right;
+
+  word-break: break-word;
+
+  font-weight: 400;
+}
+
+/* =====================================
+   PROFILE MENU
+===================================== */
+
+.profile-page .profile-menu {
+  border-top: 1px solid #dddddd;
+
+  padding: 0 20px;
+}
+
+/* =====================================
+   MENU ITEMS
+===================================== */
+
+.profile-page .menu-item {
+  width: 100%;
+
+  min-height: 84px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background: transparent;
+
+  border: none;
+
+  border-bottom: 1px solid #dddddd;
+
+  padding: 0 5px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  font-weight: 400;
+
+  cursor: pointer;
+
+  color: #111111;
+
+  text-align: left;
+}
+
+.profile-page .menu-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+/* =====================================
+   DARK MODE ITEM
+===================================== */
+
+.profile-page .dark-mode-item {
+  cursor: default;
+}
+
+/* =====================================
+   DARK MODE TOGGLE
+===================================== */
+
+.profile-page .toggle {
+  width: 45px;
+  height: 27px;
+
+  border: 2px solid #111111;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  padding: 2px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  transition: 0.25s ease;
+}
+
+.profile-page .toggle span {
+  width: 19px;
+  height: 19px;
+
+  border-radius: 50%;
+
+  background: #111111;
+
+  transition: 0.25s ease;
+
+  display: block;
+}
+
+.profile-page .toggle.active {
+  background: #111111;
+}
+
+.profile-page .toggle.active span {
+  background: #ffffff;
+
+  transform: translateX(17px);
+}
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+.profile-page .logout {
+  color: #e53935;
+
+  font-weight: 400;
+}
+
+.profile-page .logout:hover {
+  background: #fff3f3;
+
+  color: #d32f2f;
+}
+
+/* =====================================
+   MENU HOVER
+===================================== */
+
+.profile-page .menu-item:not(.dark-mode-item):hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+
+/* =====================================
+   PASSWORD SECTION
+===================================== */
+
+.profile-page .password-section {
+  margin: 25px 20px 0;
+
+  padding: 25px;
+
+  border: 1px solid #dddddd;
+
+  border-radius: 12px;
+
+  background: #fafafa;
+}
+
+.profile-page .password-section h2 {
+  font-size: 22px;
+
+  font-weight: 600;
+
+  margin: 0 0 20px 0;
+}
+
+.profile-page .password-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.profile-page .password-form input {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border: 1px solid #cccccc;
+
+  border-radius: 8px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  outline: none;
+}
+
+.profile-page .password-form input:focus {
+  border-color: #999999;
+}
+
+.profile-page .change-password-btn {
+  padding: 13px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.profile-page .change-password-btn:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+.profile-page .password-message {
+  margin: 0 0 15px 0;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  color: #555555;
+}
+
+/* =====================================
+   LOADING
+===================================== */
+
+.profile-loading {
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 18px;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =====================================
+   ERROR
+===================================== */
+
+.profile-error {
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-error button {
+  padding: 10px 20px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  cursor: pointer;
+}
+
+/* =====================================
+   DARK MODE
+===================================== */
+
+.profile-page.dark {
+  background: #121212;
+
+  color: #ffffff;
+}
+
+.profile-page.dark .info-value {
+  color: #ffffff;
+}
+
+.profile-page.dark .info-label {
+  color: #aaaaaa;
+}
+
+.profile-page.dark .menu-item {
+  color: #ffffff;
+
+  border-color: #333333;
+}
+
+.profile-page.dark .profile-menu {
+  border-color: #333333;
+}
+
+.profile-page.dark .toggle {
+  background: #121212;
+
+  border-color: #ffffff;
+}
+
+.profile-page.dark .toggle span {
+  background: #ffffff;
+}
+
+.profile-page.dark .toggle.active {
+  background: #ffffff;
+}
+
+.profile-page.dark .toggle.active span {
+  background: #121212;
+}
+
+.profile-page.dark .logout {
+  color: #ff5252;
+}
+
+.profile-page.dark .logout:hover {
+  background: #241414;
+}
+
+.profile-page.dark .menu-item:not(.dark-mode-item):hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.profile-page.dark .password-section {
+  background: #1c1c1c;
+
+  border-color: #333333;
+}
+
+.profile-page.dark .password-form input {
+  background: #222222;
+
+  color: #ffffff;
+
+  border-color: #444444;
+}
+
+.profile-page.dark .password-message {
+  color: #bbbbbb;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 700px) {
+  .profile-page .profile-header {
+    height: 230px;
+  }
+
+  .profile-page .profile-container {
+    max-width: 100%;
+
+    padding-top: 80px;
+  }
+
+  .profile-page .user-info {
+    padding-left: 25px;
+
+    padding-right: 25px;
+  }
+
+  .profile-page .user-info h1 {
+    font-size: 27px;
+  }
+
+  .profile-page .info-label,
+  .profile-page .info-value {
+    font-size: 16px;
+  }
+
+  .profile-page .profile-menu {
+    padding: 0 15px;
+  }
+
+  .profile-page .menu-item {
+    min-height: 75px;
+
+    font-size: 17px;
+  }
+}
