@@ -5,6 +5,11 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const getProfile = async () => {
     try {
@@ -25,6 +30,50 @@ const Profile = () => {
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+
+    setPasswordMessage("");
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      setPasswordMessage("All password fields are required");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setPasswordMessage("New password must be at least 6 characters");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setPasswordMessage("New passwords do not match");
+      return;
+    }
+
+    try {
+      setPasswordLoading(true);
+
+      const response = await api.post("/auth/change-password", {
+        currentPassword,
+        newPassword,
+      });
+
+      if (response.data.success) {
+        setPasswordMessage("Password changed successfully");
+
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+      }
+    } catch (err) {
+      setPasswordMessage(
+        err.response?.data?.message || "Failed to change password",
+      );
+    } finally {
+      setPasswordLoading(false);
     }
   };
 
@@ -60,6 +109,39 @@ const Profile = () => {
       <p>
         <strong>User ID:</strong> {user?._id}
       </p>
+
+      <hr />
+
+      <h2>Change Password</h2>
+
+      <form onSubmit={handleChangePassword}>
+        {passwordMessage && <p>{passwordMessage}</p>}
+
+        <input
+          type="password"
+          placeholder="Current Password"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="New Password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Confirm New Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+
+        <button type="submit" disabled={passwordLoading}>
+          {passwordLoading ? "Changing..." : "Change Password"}
+        </button>
+      </form>
     </div>
   );
 };

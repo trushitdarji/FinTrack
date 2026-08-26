@@ -8,5 +8,10 @@ authRoute.post("/register", authController.RegisterController);
 authRoute.post("/login", authController.LoginController);
 authRoute.post("/logout", authMiddleware, authController.LogoutController);
 authRoute.get("/me", authMiddleware, authController.GetMeController);
+authRoute.post(
+  "/change-password",
+  authMiddleware,
+  authController.ChangePasswordController,
+);
 
 export default authRoute;
