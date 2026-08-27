@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../api/axios";
-import Navbar from "./Navbar";
 
 const ProtectedRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -33,12 +32,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" />;
   }
 
-  return (
-    <>
-      <Navbar />
-      {children}
-    </>
-  );
+  return <>{children};</>;
 };
 
 export default ProtectedRoute;

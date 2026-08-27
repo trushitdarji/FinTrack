@@ -1,0 +1,1529 @@
+/* =========================================
+   FINTRACK DASHBOARD
+   All styles are scoped to .dashboard-page
+========================================= */
+
+.dashboard-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background: #f7f8fd;
+
+  color: #111827;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  box-sizing: border-box;
+}
+
+.dashboard-page *,
+.dashboard-page *::before,
+.dashboard-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   TOP NAVBAR
+========================================= */
+
+.dashboard-page .dashboard-navbar {
+  height: 80px;
+
+  width: 100%;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e8eaf0;
+
+  display: flex;
+
+  align-items: center;
+
+  position: relative;
+
+  z-index: 10;
+}
+
+/* Logo */
+
+.dashboard-page .dashboard-logo {
+  width: 260px;
+
+  padding-left: 38px;
+
+  font-size: 27px;
+
+  font-weight: 700;
+
+  color: #0d2d70;
+
+  flex-shrink: 0;
+}
+
+/* Top Navigation */
+
+.dashboard-page .dashboard-top-nav {
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 34px;
+
+  margin-left: auto;
+
+  margin-right: auto;
+}
+
+.dashboard-page .top-nav-link {
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  position: relative;
+
+  text-decoration: none;
+
+  color: #555964;
+
+  font-size: 17px;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+.dashboard-page .top-nav-link.active {
+  color: #082c70;
+
+  font-weight: 700;
+}
+
+.dashboard-page .top-nav-link.active::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 25px;
+
+  left: 0;
+
+  right: 0;
+
+  height: 2px;
+
+  background: #123785;
+}
+
+/* Navbar Right */
+
+.dashboard-page .dashboard-nav-actions {
+  width: 190px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 27px;
+
+  flex-shrink: 0;
+}
+
+.dashboard-page .nav-icon-button {
+  border: none;
+
+  background: transparent;
+
+  padding: 5px;
+
+  color: #424751;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.dashboard-page .nav-icon-button:hover {
+  color: #173c88;
+}
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.dashboard-page .dashboard-layout {
+  display: flex;
+
+  width: 100%;
+
+  min-height: calc(100vh - 80px);
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.dashboard-page .dashboard-sidebar {
+  width: 272px;
+
+  min-width: 272px;
+
+  margin-left: 15px;
+
+  margin-top: 30px;
+
+  margin-bottom: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e4eafa;
+
+  border-radius: 12px 12px 0 0;
+
+  min-height: calc(100vh - 110px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+/* Sidebar Brand */
+
+.dashboard-page .sidebar-brand {
+  padding: 27px 25px 23px;
+
+  border-bottom: 1px solid #e9edf5;
+}
+
+.dashboard-page .sidebar-brand h2 {
+  margin: 0 0 6px;
+
+  font-size: 27px;
+
+  line-height: 1;
+
+  color: #0b2d72;
+
+  font-weight: 700;
+}
+
+.dashboard-page .sidebar-brand p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #5c606b;
+
+  font-family: monospace;
+
+  letter-spacing: 0.2px;
+}
+
+/* Sidebar Main Menu */
+
+.dashboard-page .sidebar-main-menu {
+  padding: 10px 9px;
+}
+
+.dashboard-page .sidebar-link {
+  min-height: 59px;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 0 20px;
+
+  color: #555964;
+
+  text-decoration: none;
+
+  font-family: monospace;
+
+  font-size: 16px;
+
+  border-radius: 9px;
+
+  margin-bottom: 2px;
+
+  transition: 0.15s ease;
+}
+
+.dashboard-page .sidebar-link svg {
+  flex-shrink: 0;
+}
+
+.dashboard-page .sidebar-link:hover {
+  background: #f3f5fa;
+
+  color: #14377e;
+}
+
+.dashboard-page .sidebar-link.active {
+  color: #12367d;
+
+  background: #e8ecf4;
+
+  border-left: 4px solid #153a87;
+
+  padding-left: 16px;
+
+  font-weight: 700;
+}
+
+/* Sidebar Bottom */
+
+.dashboard-page .sidebar-bottom {
+  margin-top: auto;
+
+  border-top: 1px solid #edf0f5;
+
+  padding: 17px 9px 22px;
+}
+
+/* Add Transaction */
+
+.dashboard-page .sidebar-add-button {
+  height: 40px;
+
+  margin: 0 16px 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  border-radius: 7px;
+
+  background: #234394;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-family: monospace;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.dashboard-page .sidebar-add-button:hover {
+  background: #19377f;
+}
+
+/* Bottom Links */
+
+.dashboard-page .sidebar-bottom-link {
+  min-height: 43px;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 0 24px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #555964;
+
+  text-decoration: none;
+
+  font-family: monospace;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+.dashboard-page .sidebar-bottom-link:hover {
+  background: #f5f6fa;
+
+  color: #173c88;
+}
+
+.dashboard-page .logout-button {
+  text-align: left;
+}
+
+/* =========================================
+   DASHBOARD CONTENT
+========================================= */
+
+.dashboard-page .dashboard-content {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 30px 5.5% 60px 25px;
+}
+
+/* =========================================
+   HEADING
+========================================= */
+
+.dashboard-page .dashboard-heading {
+  margin-bottom: 33px;
+}
+
+.dashboard-page .dashboard-heading h1 {
+  margin: 0 0 8px;
+
+  font-size: 34px;
+
+  line-height: 1.15;
+
+  color: #071d38;
+
+  font-weight: 700;
+}
+
+.dashboard-page .dashboard-heading p {
+  margin: 0;
+
+  color: #263c59;
+
+  font-size: 17px;
+}
+
+/* =========================================
+   SUMMARY CARDS
+========================================= */
+
+.dashboard-page .summary-cards {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 25px;
+
+  margin-bottom: 42px;
+}
+
+.dashboard-page .summary-card {
+  min-height: 162px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf4;
+
+  border-radius: 13px;
+
+  padding: 25px 25px;
+
+  box-shadow: 0 6px 17px rgba(24, 50, 90, 0.06);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.5s ease,
+    background 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease,
+    color 0.5s ease;
+}
+
+.dashboard-page .summary-card:hover {
+  transform: scale(1.03);
+
+  background: #254493;
+
+  border-color: #254493;
+
+  box-shadow: 0 12px 25px rgba(24, 50, 90, 0.15);
+}
+
+.dashboard-page .summary-card:hover .summary-card-top {
+  color: #bfcdf5;
+}
+
+.dashboard-page .summary-card:hover .summary-value {
+  color: #ffffff;
+}
+
+.dashboard-page .summary-card:hover .calendar-icon {
+  color: #d8e0f5;
+}
+
+/* Card Top */
+
+.dashboard-page .summary-card-top {
+  min-height: 40px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  color: #172d48;
+
+  font-family: monospace;
+
+  font-size: 15px;
+
+  line-height: 1.3;
+}
+
+/* Income Badge */
+
+.dashboard-page .income-badge {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: #e4f1ec;
+
+  color: #08785c;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+/* Expense Badge */
+
+.dashboard-page .expense-badge {
+  padding: 7px 11px;
+
+  border-radius: 20px;
+
+  background: #f9e7e7;
+
+  color: #c72222;
+
+  font-size: 12px;
+
+  line-height: 1.1;
+
+  max-width: 120px;
+}
+
+/* Summary Value */
+
+.dashboard-page .summary-value {
+  display: block;
+
+  margin-top: 12px;
+
+  color: #071d38;
+
+  font-size: clamp(32px, 2.8vw, 53px);
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+/* Balance Card */
+
+.dashboard-page .balance-card {
+  position: relative;
+  background: #ffffff;
+  border-color: #e5eaf4;
+  color: #111827;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dashboard-page .balance-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  right: -25px;
+  top: -30px;
+
+  border: 14px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 15px;
+
+  transform: rotate(0deg);
+}
+
+.dashboard-page .balance-card .summary-card-top {
+  color: #172d48;
+}
+
+.dashboard-page .balance-card .summary-value {
+  color: #071d38;
+}
+
+/* Transaction Card */
+
+.dashboard-page .transaction-count {
+  margin-top: 18px;
+}
+
+.dashboard-page .calendar-icon {
+  color: #b7bcc8;
+
+  flex-shrink: 0;
+}
+
+/* =========================================
+   LOWER GRID
+========================================= */
+
+.dashboard-page .dashboard-lower-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+
+  gap: 25px;
+
+  align-items: start;
+}
+
+/* =========================================
+   RECENT TRANSACTIONS
+========================================= */
+
+.dashboard-page .recent-transactions-card,
+.dashboard-page .financial-health-card {
+  background: #ffffff;
+
+  border: 1px solid #e4e9f3;
+
+  border-radius: 13px;
+
+  box-shadow: 0 6px 17px rgba(24, 50, 90, 0.05);
+
+  overflow: hidden;
+}
+
+/* Section Header */
+
+.dashboard-page .section-card-header {
+  min-height: 67px;
+
+  padding: 0 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-bottom: 1px solid #e5e9f2;
+}
+
+.dashboard-page .section-card-header h2 {
+  margin: 0;
+
+  font-size: 25px;
+
+  color: #0a203b;
+
+  font-weight: 700;
+}
+
+.dashboard-page .section-card-header a {
+  color: #092e71;
+
+  text-decoration: none;
+
+  font-family: monospace;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+/* Table Header */
+
+.dashboard-page .transaction-table-header {
+  min-height: 39px;
+
+  display: grid;
+
+  grid-template-columns: 1.4fr 1fr 0.75fr;
+
+  align-items: center;
+
+  padding: 0 25px;
+
+  border-bottom: 1px solid #e8ebf2;
+
+  color: #18324f;
+
+  font-family: monospace;
+
+  font-size: 14px;
+}
+
+.dashboard-page .transaction-table-header span:last-child {
+  text-align: right;
+}
+
+/* Transaction Row */
+
+.dashboard-page .transaction-row {
+  min-height: 76px;
+
+  display: grid;
+
+  grid-template-columns: 1.4fr 1fr 0.75fr;
+
+  align-items: center;
+
+  padding: 0 25px;
+
+  border-bottom: 1px solid #edf0f5;
+}
+
+.dashboard-page .transaction-row:last-child {
+  border-bottom: none;
+}
+
+/* Description */
+
+.dashboard-page .transaction-description {
+  display: flex;
+
+  align-items: center;
+
+  gap: 17px;
+
+  color: #0b2542;
+
+  font-size: 16px;
+}
+
+.dashboard-page .transaction-icon {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e7f2ee;
+
+  color: #00826b;
+
+  flex-shrink: 0;
+}
+
+.dashboard-page .transaction-row:nth-child(2) .transaction-icon {
+  background: #e8edf6;
+
+  color: #173c86;
+}
+
+/* Category */
+
+.dashboard-page .transaction-category {
+  color: #17324f;
+
+  font-size: 16px;
+}
+
+/* Amount */
+
+.dashboard-page .transaction-amount-container {
+  display: flex;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.dashboard-page .transaction-amount {
+  font-family: monospace;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.dashboard-page .transaction-amount.income {
+  color: #00846b;
+}
+
+.dashboard-page .transaction-amount.expense {
+  color: #df1717;
+}
+
+/* Edit Button */
+
+.dashboard-page .edit-transaction {
+  border: none;
+
+  background: transparent;
+
+  color: #bdc6d8;
+
+  padding: 3px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.dashboard-page .edit-transaction:hover {
+  color: #23428c;
+}
+
+/* =========================================
+   FINANCIAL HEALTH
+========================================= */
+
+.dashboard-page .financial-health-card {
+  padding-bottom: 22px;
+}
+
+.dashboard-page .financial-health-card h2 {
+  margin: 0;
+  padding: 26px 25px;
+  font-size: 25px;
+  color: #0a203b;
+}
+
+/* =========================================
+   DONUT CHART
+========================================= */
+
+.dashboard-page .health-chart {
+  min-height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-page .donut-chart {
+  width: 220px;
+  height: 220px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG */
+
+.dashboard-page .financial-health-ring {
+  width: 220px;
+  height: 220px;
+
+  transform: rotate(-90deg);
+
+  overflow: visible;
+}
+
+/* Red background ring */
+
+.dashboard-page .health-ring-background {
+  fill: none;
+
+  stroke: #c91f1f;
+
+  stroke-width: 30;
+}
+
+/* Green animated ring */
+
+.dashboard-page .health-ring-progress {
+  fill: none;
+
+  stroke: #08775d;
+
+  stroke-width: 30;
+
+  stroke-linecap: butt;
+
+  stroke-dasharray: 552.92;
+
+  stroke-dashoffset: 552.92;
+}
+
+/* Animation */
+
+.dashboard-page .health-ring-progress.animate {
+  animation: financialHealthRing 1.5s ease-out forwards;
+}
+
+@keyframes financialHealthRing {
+  from {
+    stroke-dashoffset: 552.92;
+  }
+
+  to {
+    stroke-dashoffset: var(--health-progress);
+  }
+}
+
+/* White center */
+
+.dashboard-page .donut-chart::after {
+  content: "";
+
+  position: absolute;
+
+  width: 176px;
+  height: 176px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  z-index: 0;
+}
+
+/* Center */
+
+.dashboard-page .donut-center {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.dashboard-page .donut-center strong {
+  font-size: 49px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  color: #0b203b;
+}
+
+.dashboard-page .donut-center span {
+  margin-top: 6px;
+
+  color: #5d6069;
+
+  font-family: monospace;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   HEALTH LEGEND
+========================================= */
+
+.dashboard-page .health-legend {
+  padding: 0 25px;
+}
+
+.dashboard-page .legend-row {
+  min-height: 35px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  color: #142b47;
+
+  font-size: 15px;
+}
+
+.dashboard-page .legend-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.dashboard-page .legend-dot {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+}
+
+.dashboard-page .income-dot {
+  background: #08775d;
+}
+
+.dashboard-page .expense-dot {
+  background: #c91f1f;
+}
+
+.dashboard-page .donut-chart::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 17px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+.dashboard-page .donut-inner {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.dashboard-page .donut-inner strong {
+  font-size: 49px;
+
+  line-height: 1;
+
+  color: #0b203b;
+
+  font-weight: 700;
+}
+
+.dashboard-page .donut-inner span {
+  margin-top: 6px;
+
+  color: #5d6069;
+
+  font-family: monospace;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   HEALTH LEGEND
+========================================= */
+
+.dashboard-page .health-legend {
+  padding: 0 25px;
+}
+
+.dashboard-page .legend-row {
+  min-height: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: #142b47;
+
+  font-size: 15px;
+}
+
+.dashboard-page .legend-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.dashboard-page .legend-dot {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+}
+
+.dashboard-page .income-dot {
+  background: #08775d;
+}
+
+.dashboard-page .expense-dot {
+  background: #c91f1f;
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+  .dashboard-page .dashboard-content {
+    padding-right: 9%;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+  .dashboard-page .dashboard-sidebar {
+    width: 225px;
+
+    min-width: 225px;
+  }
+
+  .dashboard-page .dashboard-logo {
+    width: 210px;
+  }
+
+  .dashboard-page .dashboard-top-nav {
+    gap: 20px;
+  }
+
+  .dashboard-page .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-page .dashboard-lower-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-page .financial-health-card {
+    min-height: 500px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+  .dashboard-page {
+    background: #f7f8fd;
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-page .donut-chart {
+      width: 185px;
+      height: 185px;
+    }
+
+    .dashboard-page .financial-health-ring {
+      width: 185px;
+      height: 185px;
+    }
+
+    .dashboard-page .donut-chart::after {
+      width: 145px;
+      height: 145px;
+    }
+
+    .dashboard-page .donut-center strong {
+      font-size: 42px;
+    }
+  }
+
+  /* Navbar */
+
+  .dashboard-page .dashboard-navbar {
+    height: 65px;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+  }
+
+  .dashboard-page .dashboard-logo {
+    width: auto;
+
+    padding-left: 0;
+
+    font-size: 23px;
+  }
+
+  .dashboard-page .dashboard-top-nav {
+    display: none;
+  }
+
+  .dashboard-page .dashboard-nav-actions {
+    width: auto;
+
+    gap: 15px;
+  }
+
+  /* Layout */
+
+  .dashboard-page .dashboard-layout {
+    display: block;
+
+    min-height: calc(100vh - 65px);
+  }
+
+  /* Sidebar */
+
+  .dashboard-page .dashboard-sidebar {
+    display: none;
+  }
+
+  /* Content */
+
+  .dashboard-page .dashboard-content {
+    width: 100%;
+
+    padding: 22px 15px 40px;
+  }
+
+  /* Heading */
+
+  .dashboard-page .dashboard-heading {
+    margin-bottom: 25px;
+  }
+
+  .dashboard-page .dashboard-heading h1 {
+    font-size: 27px;
+  }
+
+  .dashboard-page .dashboard-heading p {
+    font-size: 14px;
+
+    line-height: 1.5;
+  }
+
+  /* Summary Cards */
+
+  .dashboard-page .summary-cards {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+  }
+
+  .dashboard-page .summary-card {
+    min-height: 140px;
+
+    padding: 22px;
+  }
+
+  .dashboard-page .summary-value {
+    font-size: 38px;
+  }
+
+  /* Lower Grid */
+
+  .dashboard-page .dashboard-lower-grid {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  /* Recent Transactions */
+
+  .dashboard-page .section-card-header {
+    min-height: 62px;
+
+    padding: 0 18px;
+  }
+
+  .dashboard-page .section-card-header h2 {
+    font-size: 21px;
+  }
+
+  .dashboard-page .section-card-header a {
+    font-size: 13px;
+  }
+
+  /* Table Header */
+
+  .dashboard-page .transaction-table-header {
+    grid-template-columns: 1.3fr 0.8fr 0.8fr;
+
+    padding: 0 18px;
+
+    font-size: 12px;
+  }
+
+  /* Transaction Row */
+
+  .dashboard-page .transaction-row {
+    grid-template-columns: 1.3fr 0.8fr 0.8fr;
+
+    min-height: 70px;
+
+    padding: 0 18px;
+  }
+
+  .dashboard-page .transaction-description {
+    gap: 9px;
+
+    font-size: 14px;
+  }
+
+  .dashboard-page .transaction-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dashboard-page .transaction-category {
+    font-size: 13px;
+  }
+
+  .dashboard-page .transaction-amount {
+    font-size: 12px;
+  }
+
+  .dashboard-page .edit-transaction {
+    display: none;
+  }
+
+  /* Financial Health */
+
+  .dashboard-page .financial-health-card h2 {
+    font-size: 21px;
+
+    padding: 22px 20px;
+  }
+
+  .dashboard-page .health-chart {
+    min-height: 270px;
+  }
+
+  .dashboard-page .donut-chart {
+    width: 185px;
+    height: 185px;
+  }
+
+  .dashboard-page .financial-health-ring {
+    width: 185px;
+    height: 185px;
+  }
+
+  .dashboard-page .donut-chart::after {
+    width: 148px;
+    height: 148px;
+  }
+
+  .dashboard-page .donut-center strong {
+    font-size: 42px;
+  }
+
+  .dashboard-page .donut-inner strong {
+    font-size: 42px;
+  }
+
+  .dashboard-page .health-legend {
+    padding: 0 20px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+  .dashboard-page .dashboard-content {
+    padding-left: 12px;
+
+    padding-right: 12px;
+  }
+
+  .dashboard-page .summary-value {
+    font-size: 34px;
+  }
+
+  .dashboard-page .expense-badge {
+    font-size: 10px;
+
+    max-width: 105px;
+  }
+
+  .dashboard-page .transaction-table-header {
+    grid-template-columns: 1.2fr 0.7fr 0.8fr;
+
+    padding: 0 12px;
+  }
+
+  .dashboard-page .transaction-row {
+    grid-template-columns: 1.2fr 0.7fr 0.8fr;
+
+    padding: 0 12px;
+  }
+
+  .dashboard-page .transaction-description span {
+    max-width: 85px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+  }
+
+  .dashboard-page .transaction-category {
+    font-size: 12px;
+  }
+
+  .dashboard-page .transaction-amount {
+    font-size: 11px;
+  }
+}
+
+/* SVG */
+
+.dashboard-page .financial-health-ring {
+  width: 220px;
+  height: 220px;
+
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+/* Red complete ring */
+
+.dashboard-page .health-ring-background {
+  fill: none;
+
+  stroke: #c91f1f;
+
+  /* stroke-width: 18; */
+}
+
+/* Green ring */
+
+.dashboard-page .health-ring-progress {
+  fill: none;
+
+  stroke: #08775d;
+
+  /* stroke-width: 18; */
+
+  stroke-linecap: butt;
+
+  /*
+    Circle circumference:
+    2 × π × 88 ≈ 552.92
+  */
+
+  stroke-dasharray: 552.92;
+
+  /*
+    Initially hidden
+  */
+
+  stroke-dashoffset: 552.92;
+}
+
+/* Animation */
+
+.dashboard-page .health-ring-progress.animate {
+  animation: financialHealthRing 1.5s ease-out forwards;
+}
+
+@keyframes financialHealthRing {
+  from {
+    stroke-dashoffset: 552.92;
+  }
+
+  to {
+    /*
+      58.7% green
+
+      552.92 × (1 - 0.587)
+      ≈ 228.36
+    */
+
+    stroke-dashoffset: 228.36;
+  }
+}
+
+/* Center */
+
+.dashboard-page .donut-center {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.dashboard-page .donut-center strong {
+  font-size: 50px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  color: #071d38;
+}
+
+.dashboard-page .donut-center span {
+  margin-top: 8px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #5d6470;
+}
