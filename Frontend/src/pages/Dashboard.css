@@ -849,54 +849,6 @@
   justify-content: center;
 }
 
-.dashboard-page .donut-chart {
-  width: 220px;
-  height: 220px;
-
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* SVG */
-
-.dashboard-page .financial-health-ring {
-  width: 220px;
-  height: 220px;
-
-  transform: rotate(-90deg);
-
-  overflow: visible;
-}
-
-/* Red background ring */
-
-.dashboard-page .health-ring-background {
-  fill: none;
-
-  stroke: #c91f1f;
-
-  stroke-width: 30;
-}
-
-/* Green animated ring */
-
-.dashboard-page .health-ring-progress {
-  fill: none;
-
-  stroke: #08775d;
-
-  stroke-width: 30;
-
-  stroke-linecap: butt;
-
-  stroke-dasharray: 552.92;
-
-  stroke-dashoffset: 552.92;
-}
-
 /* Animation */
 
 .dashboard-page .health-ring-progress.animate {
@@ -1150,8 +1102,448 @@
 }
 
 /* =========================================
+   FINANCIAL HEALTH
+========================================= */
+
+.dashboard-page .financial-health-card {
+  padding-bottom: 22px;
+}
+
+.dashboard-page .financial-health-card h2 {
+  margin: 0;
+  padding: 26px 25px;
+  font-size: 25px;
+  color: #0a203b;
+}
+
+/* =========================================
+   DONUT
+========================================= */
+
+.dashboard-page .health-chart {
+  min-height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-page .donut-chart {
+  width: 220px;
+  height: 220px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-page .financial-health-ring {
+  width: 220px;
+  height: 220px;
+
+  transform: rotate(-90deg);
+
+  overflow: visible;
+}
+
+.dashboard-page .health-ring-background {
+  fill: none;
+
+  stroke: #c91f1f;
+
+  /* THICK DONUT */
+  stroke-width: 22;
+}
+
+.dashboard-page .health-ring-progress {
+  fill: none;
+
+  stroke: #08775d;
+
+  /* THICK DONUT */
+  stroke-width: 22;
+
+  stroke-linecap: butt;
+
+  stroke-dasharray: 552.92;
+
+  stroke-dashoffset: 552.92;
+}
+
+.dashboard-page .health-ring-progress.animate {
+  animation: financialHealthRing 1.5s ease-out forwards;
+}
+
+@keyframes financialHealthRing {
+  from {
+    stroke-dashoffset: 552.92;
+  }
+
+  to {
+    stroke-dashoffset: var(--health-progress);
+  }
+}
+
+/* =========================================
+   DONUT CENTER
+========================================= */
+
+.dashboard-page .donut-chart::after {
+  content: "";
+
+  position: absolute;
+
+  width: 176px;
+  height: 176px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  z-index: 0;
+}
+
+.dashboard-page .donut-center {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.dashboard-page .donut-center strong {
+  font-size: 49px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  color: #0b203b;
+}
+
+.dashboard-page .donut-center span {
+  margin-top: 6px;
+
+  color: #5d6069;
+
+  font-family: monospace;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   HEALTH LEGEND
+========================================= */
+
+.dashboard-page .health-legend {
+  padding: 0 25px;
+}
+
+.dashboard-page .legend-row {
+  min-height: 35px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  color: #142b47;
+
+  font-size: 15px;
+}
+
+.dashboard-page .legend-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.dashboard-page .legend-dot {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+}
+
+.dashboard-page .income-dot {
+  background: #08775d;
+}
+
+.dashboard-page .expense-dot {
+  background: #c91f1f;
+}
+
+/* =========================================
    MOBILE
 ========================================= */
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+.dashboard-page .mobile-menu-button {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  color: #424751;
+
+  padding: 5px;
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   MOBILE ADD TRANSACTION
+========================================= */
+
+.dashboard-page .mobile-add-transaction-button {
+  display: none;
+}
+
+/* =========================================
+   MOBILE SIDEBAR
+========================================= */
+
+.dashboard-page .mobile-sidebar {
+  display: none;
+}
+
+.dashboard-page .mobile-sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* =====================================
+     MOBILE NAVBAR
+  ===================================== */
+
+  .dashboard-page .mobile-menu-button {
+    display: flex;
+
+    order: 3;
+  }
+
+  .dashboard-page .dashboard-nav-actions {
+    order: 2;
+  }
+
+  .dashboard-page .dashboard-logo {
+    order: 1;
+  }
+
+  /* =====================================
+     MOBILE ADD TRANSACTION
+  ===================================== */
+
+  .dashboard-page .mobile-add-transaction-button {
+    display: flex;
+
+    width: 100%;
+
+    height: 48px;
+
+    margin-top: 18px;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #123785;
+
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    box-shadow: 0 4px 10px rgba(18, 55, 133, 0.15);
+
+    transition: 0.2s ease;
+  }
+
+  .dashboard-page .mobile-add-transaction-button:hover {
+    background: #0d2d70;
+  }
+
+  /* =====================================
+     MOBILE SIDEBAR
+  ===================================== */
+
+  .dashboard-page .mobile-sidebar-overlay {
+    display: block;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 9998;
+  }
+
+  .dashboard-page .mobile-sidebar {
+    display: block;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 280px;
+    max-width: 82vw;
+
+    height: 100vh;
+
+    background: #ffffff;
+
+    z-index: 9999;
+
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.12);
+
+    animation: mobileSidebarOpen 0.22s ease-out;
+  }
+
+  .dashboard-page .mobile-sidebar-header {
+    height: 75px;
+
+    padding: 0 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #e9edf5;
+  }
+
+  .dashboard-page .mobile-sidebar-header h2 {
+    margin: 0;
+
+    font-size: 25px;
+
+    color: #0b2d72;
+  }
+
+  .dashboard-page .mobile-sidebar-header button {
+    border: none;
+
+    background: transparent;
+
+    color: #424751;
+
+    padding: 5px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard-page .mobile-sidebar-menu {
+    padding: 18px 12px;
+  }
+
+  .dashboard-page .mobile-sidebar-link {
+    min-height: 55px;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 0 18px;
+
+    margin-bottom: 6px;
+
+    border-radius: 9px;
+
+    color: #555964;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    transition: 0.15s ease;
+  }
+
+  .dashboard-page .mobile-sidebar-link:hover {
+    background: #f3f5fa;
+
+    color: #14377e;
+  }
+
+  .dashboard-page .mobile-sidebar-link.active {
+    background: #e8ecf4;
+
+    color: #12367d;
+
+    border-left: 4px solid #153a87;
+
+    padding-left: 14px;
+  }
+
+  @keyframes mobileSidebarOpen {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* =====================================
+     MOBILE DONUT
+  ===================================== */
+
+  .dashboard-page .donut-chart {
+    width: 185px;
+    height: 185px;
+  }
+
+  .dashboard-page .financial-health-ring {
+    width: 185px;
+    height: 185px;
+  }
+
+  .dashboard-page .donut-chart::after {
+    width: 145px;
+    height: 145px;
+  }
+
+  .dashboard-page .donut-center strong {
+    font-size: 42px;
+  }
+}
 
 @media (max-width: 768px) {
   .dashboard-page {

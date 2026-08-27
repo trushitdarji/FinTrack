@@ -144,6 +144,8 @@ import {
   Pencil,
   CalendarDays,
   TrendingUp,
+  Menu,
+  X,
 } from "lucide-react";
 
 import api from "../api/axios";
@@ -168,6 +170,7 @@ const Dashboard = () => {
   // =====================================
 
   const [healthAnimated, setHealthAnimated] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -392,6 +395,15 @@ const Dashboard = () => {
 
         {/* Right Icons */}
 
+        <button
+          className="mobile-menu-button"
+          type="button"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Open menu"
+        >
+          {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
+        </button>
+
         <div className="dashboard-nav-actions">
           <button className="nav-icon-button" title="Notifications">
             <Bell size={23} />
@@ -483,6 +495,67 @@ const Dashboard = () => {
           </div>
         </aside>
 
+        {mobileMenuOpen && (
+          <>
+            <div
+              className="mobile-sidebar-overlay"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+
+            <aside className="mobile-sidebar">
+              <div className="mobile-sidebar-header">
+                <h2>FinTrack</h2>
+
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <nav className="mobile-sidebar-menu">
+                {/* Dashboard */}
+
+                <a
+                  href="/dashboard"
+                  className="mobile-sidebar-link active"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <LayoutDashboard size={21} />
+
+                  <span>Dashboard</span>
+                </a>
+
+                {/* Transaction */}
+
+                <a
+                  href="/transaction"
+                  className="mobile-sidebar-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <ReceiptText size={21} />
+
+                  <span>Transactions</span>
+                </a>
+
+                {/* Profile */}
+
+                <a
+                  href="/profile"
+                  className="mobile-sidebar-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <CircleUserRound size={21} />
+
+                  <span>Profile</span>
+                </a>
+              </nav>
+            </aside>
+          </>
+        )}
+
         {/* =================================
             DASHBOARD CONTENT
         ================================== */}
@@ -496,6 +569,15 @@ const Dashboard = () => {
             <h1>Financial Overview</h1>
 
             <p>Track and analyze your corporate finances.</p>
+
+            <a
+              href="/add-transaction"
+              className="mobile-add-transaction-button"
+            >
+              <Plus size={19} />
+
+              <span>Add Transaction</span>
+            </a>
           </section>
 
           {/* =================================
