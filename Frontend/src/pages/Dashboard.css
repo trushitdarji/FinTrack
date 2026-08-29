@@ -1154,7 +1154,7 @@
   stroke: #c91f1f;
 
   /* THICK DONUT */
-  stroke-width: 22;
+  stroke-width: 30;
 }
 
 .dashboard-page .health-ring-progress {
@@ -1163,7 +1163,7 @@
   stroke: #08775d;
 
   /* THICK DONUT */
-  stroke-width: 22;
+  stroke-width: 30;
 
   stroke-linecap: butt;
 
@@ -1348,6 +1348,11 @@
 
   .dashboard-page .dashboard-logo {
     order: 1;
+  }
+
+  .dashboard-page .health-ring-background,
+  .dashboard-page .health-ring-progress {
+    stroke-width: 16px;
   }
 
   /* =====================================
@@ -1724,6 +1729,38 @@
     display: none;
   }
 
+  @media (max-width: 768px) {
+    .dashboard-page .transaction-amount-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dashboard-page .edit-transaction {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 32px;
+      height: 32px;
+
+      flex-shrink: 0;
+
+      border: none;
+      background: transparent;
+
+      color: #6b7280;
+
+      cursor: pointer;
+
+      border-radius: 6px;
+    }
+
+    .dashboard-page .edit-transaction:hover {
+      background: #f1f1f1;
+      color: #123785;
+    }
+  }
   /* Financial Health */
 
   .dashboard-page .financial-health-card h2 {
@@ -1843,7 +1880,7 @@
 
   stroke: #08775d;
 
-  /* stroke-width: 18; */
+  /* stroke-width: 18;  */
 
   stroke-linecap: butt;
 

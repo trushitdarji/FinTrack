@@ -454,13 +454,7 @@ const Dashboard = () => {
               <span>Transactions</span>
             </a>
 
-            <a href="/reports" className="sidebar-link">
-              <BarChart3 size={22} />
-
-              <span>Reports</span>
-            </a>
-
-            <a href="/settings" className="sidebar-link">
+            <a href="/profile" className="sidebar-link">
               <Settings size={22} />
 
               <span>Settings</span>
