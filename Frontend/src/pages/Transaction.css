@@ -1,0 +1,989 @@
+/* =========================================================
+   TRANSACTION PAGE
+========================================================= */
+
+.transaction-page {
+  min-height: 100vh;
+  background: #f7f8fd;
+  color: #10243b;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.transaction-page .transaction-header {
+  height: 90px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8eaf0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 44px;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* LOGO */
+
+.transaction-page .transaction-logo {
+  font-size: 29px;
+  font-weight: 700;
+  color: #0c2d78;
+}
+
+/* NAVIGATION */
+
+.transaction-page .transaction-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.transaction-page .transaction-nav-link {
+  border: none;
+  background: transparent;
+
+  color: #4e515b;
+
+  font-size: 18px;
+  padding: 31px 0 13px;
+
+  cursor: pointer;
+
+  border-bottom: 2px solid transparent;
+}
+
+.transaction-page .transaction-nav-link:hover {
+  color: #0b2e7c;
+}
+
+.transaction-page .transaction-nav-link.active {
+  color: #082c78;
+  font-weight: 700;
+  border-bottom-color: #082c78;
+}
+
+/* RIGHT SIDE */
+
+.transaction-page .transaction-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.transaction-page .transaction-icon-button {
+  border: none;
+  background: transparent;
+
+  color: #0a2f7d;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.transaction-page .transaction-main {
+  max-width: 1600px;
+  margin: 0 auto;
+
+  padding: 38px 48px 50px;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.transaction-page .transaction-title-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 28px;
+}
+
+.transaction-page .transaction-title-section h1 {
+  margin: 0 0 8px;
+
+  font-size: 40px;
+  line-height: 1.1;
+
+  color: #10243b;
+}
+
+.transaction-page .transaction-title-section p {
+  margin: 0;
+
+  font-size: 18px;
+  color: #24384f;
+}
+
+/* =========================================================
+   NEW TRANSACTION BUTTON
+========================================================= */
+
+.transaction-page .new-transaction-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: #092f7d;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 14px 23px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(9, 47, 125, 0.15);
+
+  transition: 0.2s ease;
+}
+
+.transaction-page .new-transaction-button:hover {
+  background: #062662;
+  transform: translateY(-1px);
+}
+
+/* MOBILE BUTTON - DESKTOP HIDDEN */
+
+.transaction-page .mobile-add-transaction {
+  display: none;
+}
+
+/* =========================================================
+   FILTER SECTION - DESKTOP
+========================================================= */
+
+.transaction-page .transaction-filters {
+  width: 100%;
+  max-width: 100%;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e8e8eb;
+  border-radius: 13px;
+
+  padding: 20px 22px;
+
+  margin-bottom: 32px;
+
+  display: grid;
+
+  /*
+    Search smaller
+    Type / Category / Sort equal
+    From / To slightly smaller
+    Button proper size
+  */
+  grid-template-columns:
+    1.05fr
+    0.9fr
+    0.9fr
+    0.9fr
+    0.72fr
+    0.72fr
+    auto;
+
+  gap: 14px;
+
+  align-items: end;
+
+  box-shadow: 0 4px 14px rgba(17, 35, 65, 0.04);
+}
+
+/* =========================================================
+   FILTER FIELD
+========================================================= */
+
+.transaction-page .filter-field {
+  min-width: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+/* LABEL */
+
+.transaction-page .filter-field label {
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #10243b;
+}
+
+/* =========================================================
+   INPUT + SELECT
+========================================================= */
+
+.transaction-page .filter-field input,
+.transaction-page .filter-field select {
+  width: 100%;
+  min-width: 0;
+
+  height: 43px;
+
+  box-sizing: border-box;
+
+  padding: 0 12px;
+
+  border: 1px solid #dfe3eb;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #10243b;
+
+  font-size: 14px;
+
+  outline: none;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  transition: 0.2s ease;
+}
+
+/* FOCUS */
+
+.transaction-page .filter-field input:focus,
+.transaction-page .filter-field select:focus {
+  border-color: #0b3c92;
+
+  box-shadow: 0 0 0 3px rgba(11, 60, 146, 0.08);
+}
+
+/* =========================================================
+   DATE INPUT
+========================================================= */
+
+.transaction-page .filter-field input[type="date"] {
+  min-width: 0;
+
+  width: 100%;
+
+  padding-left: 12px;
+  padding-right: 8px;
+}
+
+/* =========================================================
+   APPLY BUTTON
+========================================================= */
+
+.transaction-page .apply-filter-button {
+  height: 43px;
+
+  padding: 0 17px;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #092f7d;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.transaction-page .apply-filter-button:hover {
+  background: #062662;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   TRANSACTION GRID
+========================================================= */
+
+.transaction-page .transaction-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 28px;
+
+  align-items: stretch;
+}
+
+/* =========================================================
+   TRANSACTION CARD
+========================================================= */
+
+.transaction-page .transaction-card {
+  background: #ffffff;
+
+  border: 1px solid #e8e8eb;
+  border-radius: 13px;
+
+  padding: 28px;
+
+  min-height: 420px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 5px 16px rgba(17, 35, 65, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.transaction-page .transaction-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 9px 22px rgba(17, 35, 65, 0.1);
+}
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.transaction-page .transaction-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+/* INCOME / EXPENSE BADGE */
+
+.transaction-page .transaction-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.transaction-page .transaction-type.income {
+  color: #007952;
+  background: #e6f3ee;
+}
+
+.transaction-page .transaction-type.expense {
+  color: #d51d1d;
+  background: #fae9e9;
+}
+
+/* DATE */
+
+.transaction-page .transaction-date {
+  color: #183553;
+
+  font-family: monospace;
+
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.transaction-page .transaction-card-title {
+  margin: 0 0 8px;
+
+  font-size: 28px;
+  line-height: 1.2;
+
+  color: #10243b;
+}
+
+.transaction-page .transaction-category {
+  margin: 0;
+
+  font-family: monospace;
+
+  font-size: 16px;
+
+  color: #183553;
+}
+
+/* =========================================================
+   AMOUNT
+========================================================= */
+
+.transaction-page .transaction-amount {
+  margin-top: 25px;
+  margin-bottom: 25px;
+
+  font-size: 58px;
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -1.5px;
+}
+
+.transaction-page .income-amount {
+  color: #007c55;
+}
+
+.transaction-page .expense-amount {
+  color: #10243b;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.transaction-page .transaction-description {
+  margin: 0;
+
+  color: #294158;
+
+  font-size: 17px;
+
+  line-height: 1.55;
+
+  min-height: 54px;
+}
+
+/* =========================================================
+   CARD BUTTONS
+========================================================= */
+
+.transaction-page .transaction-card-actions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: auto;
+  padding-top: 18px;
+
+  border-top: 1px solid #ececf0;
+}
+
+.transaction-page .transaction-edit-button,
+.transaction-page .transaction-delete-button {
+  height: 44px;
+
+  border: none;
+  border-radius: 9px;
+
+  font-family: monospace;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+/* EDIT */
+
+.transaction-page .transaction-edit-button {
+  background: #e4edff;
+  color: #063078;
+}
+
+.transaction-page .transaction-edit-button:hover {
+  background: #d7e4ff;
+}
+
+/* DELETE */
+
+.transaction-page .transaction-delete-button {
+  background: #fff4f4;
+  color: #d51c1c;
+}
+
+.transaction-page .transaction-delete-button:hover {
+  background: #ffe5e5;
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.transaction-page .transaction-pagination {
+  margin-top: 38px;
+
+  min-height: 88px;
+
+  background: #ffffff;
+
+  border: 1px solid #e8e8eb;
+  border-radius: 13px;
+
+  padding: 0 20px;
+
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+
+  box-shadow: 0 4px 14px rgba(17, 35, 65, 0.04);
+}
+
+.transaction-page .pagination-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  width: fit-content;
+
+  padding: 11px 25px;
+
+  background: #ffffff;
+
+  color: #062f7b;
+
+  border: 1px solid #0b3c92;
+
+  border-radius: 9px;
+
+  font-family: monospace;
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+.transaction-page .pagination-button:first-child {
+  justify-self: start;
+}
+
+.transaction-page .pagination-button:last-child {
+  justify-self: end;
+}
+
+.transaction-page .pagination-button:hover:not(:disabled) {
+  background: #f1f5ff;
+}
+
+.transaction-page .pagination-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.transaction-page .pagination-info {
+  font-family: monospace;
+
+  font-size: 15px;
+
+  color: #24384f;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .transaction-page .transaction-main {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .transaction-page .transaction-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .transaction-page .transaction-card-title {
+    font-size: 25px;
+  }
+
+  .transaction-page .transaction-amount {
+    font-size: 48px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  /* HEADER */
+
+  .transaction-page .transaction-header {
+    height: 70px;
+
+    padding: 0 18px;
+  }
+
+  .transaction-page .transaction-logo {
+    font-size: 24px;
+  }
+
+  .transaction-page .transaction-nav {
+    display: none;
+  }
+
+  .transaction-page .transaction-nav-actions {
+    gap: 14px;
+  }
+
+  .transaction-page .transaction-icon-button {
+    display: none;
+  }
+
+  /* Main */
+
+  .transaction-page .transaction-main {
+    padding: 25px 16px 35px;
+  }
+
+  /* TITLE */
+
+  .transaction-page .transaction-title-section {
+    margin-bottom: 18px;
+  }
+
+  .transaction-page .transaction-title-section h1 {
+    font-size: 31px;
+  }
+
+  .transaction-page .transaction-title-section p {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* Desktop Add Button hidden */
+
+  .transaction-page .new-transaction-button {
+    display: none;
+  }
+
+  /* Mobile Add Button */
+
+  .transaction-page .mobile-add-transaction {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 13px;
+
+    margin-bottom: 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #092f7d;
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+  }
+
+  /* =========================================================
+   MOBILE FILTERS
+========================================================= */
+
+  @media (max-width: 768px) {
+    .transaction-page .transaction-filters {
+      width: 100%;
+
+      max-width: 100%;
+
+      box-sizing: border-box;
+
+      margin: 0 0 20px 0;
+
+      padding: 15px;
+
+      display: grid;
+
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+      gap: 12px;
+
+      border-radius: 11px;
+    }
+
+    /* =====================================================
+     SEARCH - FULL WIDTH
+  ===================================================== */
+
+    .transaction-page .search-field {
+      grid-column: 1 / -1;
+
+      width: 100%;
+
+      min-width: 0;
+    }
+
+    /* =====================================================
+     ALL FILTER FIELDS
+  ===================================================== */
+
+    .transaction-page .filter-field {
+      width: 100%;
+
+      min-width: 0;
+    }
+
+    /* =====================================================
+     LABEL
+  ===================================================== */
+
+    .transaction-page .filter-field label {
+      font-size: 12px;
+
+      line-height: 1.2;
+    }
+
+    /* =====================================================
+     INPUT + SELECT
+  ===================================================== */
+
+    .transaction-page .filter-field input,
+    .transaction-page .filter-field select {
+      width: 100%;
+
+      min-width: 0;
+
+      max-width: 100%;
+
+      height: 43px;
+
+      box-sizing: border-box;
+
+      padding: 0 10px;
+
+      font-size: 13px;
+
+      border-radius: 8px;
+    }
+
+    /* =====================================================
+     DATE
+  ===================================================== */
+
+    .transaction-page .filter-field input[type="date"] {
+      width: 100%;
+
+      min-width: 0;
+
+      max-width: 100%;
+
+      padding-left: 10px;
+
+      padding-right: 5px;
+
+      font-size: 13px;
+    }
+
+    /* =====================================================
+     APPLY BUTTON
+  ===================================================== */
+
+    .transaction-page .apply-filter-button {
+      grid-column: 1 / -1;
+
+      width: 100%;
+
+      height: 43px;
+
+      margin-top: 1px;
+
+      font-size: 14px;
+    }
+  }
+
+  /* 2 X 2 GRID */
+
+  .transaction-page .transaction-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+
+  /* CARD */
+
+  .transaction-page .transaction-card {
+    min-height: 330px;
+
+    padding: 16px;
+
+    border-radius: 11px;
+  }
+
+  /* CARD TOP */
+
+  .transaction-page .transaction-card-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-bottom: 15px;
+  }
+
+  .transaction-page .transaction-type {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .transaction-page .transaction-date {
+    font-size: 11px;
+  }
+
+  /* TITLE */
+
+  .transaction-page .transaction-card-title {
+    font-size: 18px;
+
+    line-height: 1.25;
+
+    margin-bottom: 6px;
+  }
+
+  .transaction-page .transaction-category {
+    font-size: 12px;
+  }
+
+  /* AMOUNT */
+
+  .transaction-page .transaction-amount {
+    margin-top: 18px;
+    margin-bottom: 17px;
+
+    font-size: 29px;
+
+    letter-spacing: -0.5px;
+  }
+
+  /* DESCRIPTION */
+
+  .transaction-page .transaction-description {
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    min-height: 55px;
+  }
+
+  /* BUTTONS */
+
+  .transaction-page .transaction-card-actions {
+    gap: 7px;
+
+    padding-top: 13px;
+  }
+
+  .transaction-page .transaction-edit-button,
+  .transaction-page .transaction-delete-button {
+    height: 36px;
+
+    font-size: 13px;
+  }
+
+  /* PAGINATION */
+
+  .transaction-page .transaction-pagination {
+    margin-top: 20px;
+
+    min-height: 70px;
+
+    padding: 0 10px;
+
+    border-radius: 10px;
+  }
+
+  .transaction-page .pagination-button {
+    padding: 9px 10px;
+
+    font-size: 13px;
+  }
+
+  .transaction-page .pagination-button svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .transaction-page .pagination-info {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .transaction-page .transaction-main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .transaction-page .transaction-grid {
+    gap: 10px;
+  }
+
+  .transaction-page .transaction-card {
+    padding: 13px;
+  }
+
+  .transaction-page .transaction-card-title {
+    font-size: 16px;
+  }
+
+  .transaction-page .transaction-amount {
+    font-size: 25px;
+  }
+
+  .transaction-page .transaction-description {
+    font-size: 12px;
+  }
+
+  .transaction-page .transaction-edit-button,
+  .transaction-page .transaction-delete-button {
+    font-size: 12px;
+  }
+}

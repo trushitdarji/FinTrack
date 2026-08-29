@@ -1335,7 +1335,9 @@
   /* =====================================
      MOBILE NAVBAR
   ===================================== */
-
+  .dashboard-page .nav-icon-button[title="Notifications"] {
+    display: none !important;
+  }
   .dashboard-page .mobile-menu-button {
     display: flex;
 

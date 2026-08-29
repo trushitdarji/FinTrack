@@ -455,9 +455,8 @@ const Dashboard = () => {
             </a>
 
             <a href="/profile" className="sidebar-link">
-              <Settings size={22} />
-
-              <span>Settings</span>
+              <CircleUserRound size={22} />
+              <span>Profile</span>
             </a>
           </div>
 
