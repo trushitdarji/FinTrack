@@ -148,14 +148,19 @@
 // };
 
 // export default AddTransaction;
+
 import React, { useState } from "react";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
-import { Bell, UserCircle } from "lucide-react";
+import { Bell, UserCircle, Menu, X } from "lucide-react";
 import "./AddTransaction.css";
 
 const AddTransaction = () => {
   const navigate = useNavigate();
+
+  // =========================
+  // FORM STATE
+  // =========================
 
   const [formData, setFormData] = useState({
     title: "",
@@ -169,6 +174,12 @@ const AddTransaction = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
+
+  // =========================
+  // MOBILE MENU
+  // =========================
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const categories = [
     "Food",
@@ -289,7 +300,7 @@ const AddTransaction = () => {
         {/* LOGO */}
         <div className="transaction-logo">FinTrack</div>
 
-        {/* NAVIGATION */}
+        {/* DESKTOP + MOBILE NAVIGATION */}
         <nav className="transaction-nav">
           <button
             onClick={() => navigate("/dashboard")}
@@ -305,25 +316,86 @@ const AddTransaction = () => {
             Transactions
           </button>
 
-          <button className="transaction-nav-link active">
+          <button
+            className="transaction-nav-link active"
+            onClick={() => navigate("/add-transaction")}
+          >
             Add-Transaction
           </button>
         </nav>
 
         {/* RIGHT SIDE */}
         <div className="transaction-nav-actions">
-          <button className="transaction-icon-button" title="Notifications">
+          {/* NOTIFICATION */}
+          <button
+            className="transaction-icon-button notification-button"
+            title="Notifications"
+          >
             <Bell size={23} />
           </button>
 
+          {/* PROFILE */}
           <button
             className="transaction-icon-button"
             title="Profile"
-            onClick={() => navigate("/profile")}
+            onClick={() => {
+              navigate("/profile");
+              setMobileMenuOpen(false);
+            }}
           >
             <UserCircle size={23} />
           </button>
+
+          {/* MOBILE MENU BUTTON */}
+          <button
+            className="mobile-menu-button"
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Open menu"
+          >
+            {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
+          </button>
         </div>
+        {mobileMenuOpen && (
+          <div className="mobile-navigation-menu">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/dashboard");
+              }}
+            >
+              Dashboard
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/transaction");
+              }}
+            >
+              Transactions
+            </button>
+
+            <button
+              className="mobile-active"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/add-transaction");
+              }}
+            >
+              Add-Transaction
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/profile");
+              }}
+            >
+              Profile
+            </button>
+          </div>
+        )}
       </header>
 
       {/* =================================================
@@ -457,7 +529,9 @@ const AddTransaction = () => {
 
                   <button
                     type="button"
-                    className="category-selected"
+                    className={`category-selected ${
+                      categoryOpen ? "category-selected-open" : ""
+                    }`}
                     onClick={() => setCategoryOpen(!categoryOpen)}
                   >
                     <span>{formData.category}</span>

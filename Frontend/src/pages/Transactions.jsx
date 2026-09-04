@@ -663,6 +663,8 @@ import {
   ArrowUp,
   ChevronLeft,
   ChevronRight,
+  Menu,
+  X,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
@@ -670,6 +672,7 @@ import "./Transaction.css";
 
 const Transaction = () => {
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // ================================
   // ORIGINAL LOGIC - UNCHANGED
@@ -867,8 +870,10 @@ const Transaction = () => {
       {/* ================= HEADER ================= */}
 
       <header className="transaction-header">
+        {/* LOGO */}
         <div className="transaction-logo">FinTrack</div>
 
+        {/* DESKTOP NAVIGATION */}
         <nav className="transaction-nav">
           <button
             onClick={() => navigate("/dashboard")}
@@ -887,11 +892,14 @@ const Transaction = () => {
           </button>
         </nav>
 
+        {/* RIGHT SIDE */}
         <div className="transaction-nav-actions">
+          {/* Notification */}
           <button className="transaction-icon-button" title="Notifications">
             <Bell size={23} />
           </button>
 
+          {/* Profile */}
           <button
             className="transaction-icon-button"
             title="Profile"
@@ -899,7 +907,59 @@ const Transaction = () => {
           >
             <UserCircle size={23} />
           </button>
+
+          {/* MOBILE MENU */}
+          <button
+            className="mobile-menu-button"
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Open menu"
+          >
+            {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
+          </button>
         </div>
+
+        {/* MOBILE NAVIGATION MENU */}
+        {mobileMenuOpen && (
+          <div className="mobile-navigation-menu">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/dashboard");
+              }}
+            >
+              Dashboard
+            </button>
+
+            <button
+              className="mobile-active"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/transaction");
+              }}
+            >
+              Transactions
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/add-transaction");
+              }}
+            >
+              Add-Transaction
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate("/profile");
+              }}
+            >
+              Profile
+            </button>
+          </div>
+        )}
       </header>
 
       {/* ================= MAIN ================= */}

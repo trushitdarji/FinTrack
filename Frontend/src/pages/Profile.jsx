@@ -244,15 +244,24 @@
 // };
 
 // export default Profile;
-
 import React, { useEffect, useState } from "react";
-import { Bell, UserCircle } from "lucide-react";
+
+import { Bell, UserCircle, Menu, X } from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
+
 import api from "../api/axios";
+
 import "./Profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
+
+  // =====================================================
+  // MOBILE MENU STATE
+  // =====================================================
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // =====================================================
   // USER STATE
@@ -410,6 +419,30 @@ const Profile = () => {
   const userInitial = userName.charAt(0).toUpperCase();
 
   // =====================================================
+  // NAVIGATION FUNCTIONS
+  // =====================================================
+
+  const goToDashboard = () => {
+    setMobileMenuOpen(false);
+    navigate("/dashboard");
+  };
+
+  const goToTransactions = () => {
+    setMobileMenuOpen(false);
+    navigate("/transaction");
+  };
+
+  const goToAddTransaction = () => {
+    setMobileMenuOpen(false);
+    navigate("/add-transaction");
+  };
+
+  const goToProfile = () => {
+    setMobileMenuOpen(false);
+    navigate("/profile");
+  };
+
+  // =====================================================
   // UI
   // =====================================================
 
@@ -424,27 +457,18 @@ const Profile = () => {
 
         <div className="transaction-logo">FinTrack</div>
 
-        {/* NAVIGATION */}
+        {/* DESKTOP NAVIGATION */}
 
         <nav className="transaction-nav">
-          <button
-            className="transaction-nav-link"
-            onClick={() => navigate("/dashboard")}
-          >
+          <button className="transaction-nav-link" onClick={goToDashboard}>
             Dashboard
           </button>
 
-          <button
-            className="transaction-nav-link"
-            onClick={() => navigate("/transaction")}
-          >
+          <button className="transaction-nav-link" onClick={goToTransactions}>
             Transactions
           </button>
 
-          <button
-            className="transaction-nav-link"
-            onClick={() => navigate("/add-transaction")}
-          >
+          <button className="transaction-nav-link" onClick={goToAddTransaction}>
             Add-Transaction
           </button>
         </nav>
@@ -452,16 +476,51 @@ const Profile = () => {
         {/* RIGHT SIDE */}
 
         <div className="transaction-nav-actions">
-          <button className="transaction-icon-button" title="Notifications">
+          {/* Notification */}
+
+          <button
+            className="transaction-icon-button notification-button"
+            title="Notifications"
+          >
             <Bell size={23} />
           </button>
+
+          {/* Profile */}
 
           <button
             className="transaction-icon-button profile-active-icon"
             title="Profile"
+            onClick={goToProfile}
           >
             <UserCircle size={23} />
           </button>
+
+          {/* MOBILE MENU BUTTON */}
+
+          <button
+            className="mobile-menu-button"
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Open menu"
+          >
+            {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
+          </button>
+        </div>
+
+        {/* =================================================
+            MOBILE NAVIGATION MENU
+        ================================================= */}
+
+        <div
+          className={`mobile-navigation ${
+            mobileMenuOpen ? "mobile-navigation-open" : ""
+          }`}
+        >
+          <button onClick={goToDashboard}>Dashboard</button>
+
+          <button onClick={goToTransactions}>Transactions</button>
+
+          <button onClick={goToAddTransaction}>Add-Transaction</button>
         </div>
       </header>
 
@@ -520,9 +579,7 @@ const Profile = () => {
           )}
 
           <form onSubmit={handleChangePassword} className="password-form">
-            {/* ==========================================
-                CURRENT PASSWORD
-            ========================================== */}
+            {/* CURRENT PASSWORD */}
 
             <div className="password-form-group">
               <label htmlFor="currentPassword">Current Password</label>
@@ -536,9 +593,7 @@ const Profile = () => {
               />
             </div>
 
-            {/* ==========================================
-                NEW PASSWORD
-            ========================================== */}
+            {/* NEW PASSWORD */}
 
             <div className="password-form-group">
               <label htmlFor="newPassword">New Password</label>
@@ -552,9 +607,7 @@ const Profile = () => {
               />
             </div>
 
-            {/* ==========================================
-                CONFIRM PASSWORD
-            ========================================== */}
+            {/* CONFIRM PASSWORD */}
 
             <div className="password-form-group">
               <label htmlFor="confirmPassword">Confirm New Password</label>
@@ -568,9 +621,7 @@ const Profile = () => {
               />
             </div>
 
-            {/* ==========================================
-                UPDATE BUTTON
-            ========================================== */}
+            {/* UPDATE BUTTON */}
 
             <div className="password-button-wrapper">
               <button

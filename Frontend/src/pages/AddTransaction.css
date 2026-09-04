@@ -954,40 +954,453 @@
 /* =========================================================
    RESPONSIVE
    ========================================================= */
+/* =========================================================
+   MOBILE MENU BUTTON
+   DESKTOP = HIDDEN
+   ========================================================= */
 
-@media (max-width: 700px) {
-  .transaction-form-wrapper {
-    padding: 15px;
+.mobile-menu-button {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  color: #424751;
+
+  padding: 5px;
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   DESKTOP CSS REMAINS UNCHANGED
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* =========================
+     NAVBAR
+  ========================= */
+
+  .transaction-header {
+    height: 75px;
+
+    padding: 0 20px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
   }
+
+  /* =========================
+     LOGO
+  ========================= */
+
+  .transaction-logo {
+    font-size: 24px;
+  }
+
+  /* =========================
+     NAVIGATION
+  ========================= */
+
+  .transaction-nav {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .transaction-header {
+      height: 75px;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .transaction-logo {
+      font-size: 24px;
+    }
+
+    /* Desktop nav hide */
+    .transaction-nav {
+      display: none;
+    }
+
+    /* Right side */
+    .transaction-nav-actions {
+      gap: 12px;
+    }
+
+    /* Notification hide */
+    .notification-button {
+      display: none;
+    }
+
+    /* Profile hide on mobile */
+    .transaction-nav-actions .transaction-icon-button {
+      display: none;
+    }
+
+    /* Hamburger show */
+    .mobile-menu-button {
+      display: flex;
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: transparent;
+      color: #424751;
+      padding: 0;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =========================
+     MOBILE DROPDOWN MENU
+  ========================= */
+
+    .mobile-navigation-menu {
+      display: flex;
+      position: absolute;
+      top: 75px;
+      left: 0;
+      right: 0;
+
+      flex-direction: column;
+
+      background: #ffffff;
+
+      border-bottom: 1px solid #e8eaf0;
+
+      box-shadow: 0 8px 18px rgba(16, 36, 59, 0.08);
+
+      padding: 8px 14px 14px;
+
+      box-sizing: border-box;
+
+      z-index: 999;
+
+      animation: mobileMenuSlide 0.22s ease;
+    }
+
+    .mobile-navigation-menu button {
+      width: 100%;
+      height: 48px;
+
+      border: none;
+      border-radius: 7px;
+
+      background: transparent;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      padding: 0 14px;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+
+      color: #4e515b;
+
+      cursor: pointer;
+
+      box-sizing: border-box;
+    }
+
+    .mobile-navigation-menu button:hover {
+      background: #f2f5fa;
+    }
+
+    .mobile-navigation-menu button.mobile-active {
+      color: #082c78;
+      background: #eef3fc;
+      font-weight: 700;
+    }
+  }
+
+  /* =========================
+     RIGHT SIDE
+  ========================= */
+
+  .transaction-nav-actions {
+    gap: 12px;
+  }
+
+  /* Notification hidden on mobile
+     Same as your mobile dashboard design */
+
+  .notification-button {
+    display: none;
+  }
+
+  .transaction-icon-button {
+    width: 28px;
+
+    height: 28px;
+  }
+
+  /* =========================
+     HAMBURGER
+  ========================= */
+
+  .mobile-menu-button {
+    display: flex;
+  }
+
+  /* =========================
+     FORM WRAPPER
+  ========================= */
+
+  .transaction-form-wrapper {
+    min-height: calc(100vh - 75px);
+
+    padding: 16px 14px 30px;
+
+    box-sizing: border-box;
+  }
+
+  /* =========================
+     FORM CARD
+  ========================= */
 
   .transaction-form-card {
-    padding: 28px 22px;
+    width: 100%;
+
+    max-width: 100%;
+
+    min-height: auto;
+
+    margin: 0;
+
+    padding: 28px 20px 30px;
+
+    border-radius: 12px;
+
+    box-sizing: border-box;
   }
+
+  /* =========================
+     HEADER
+  ========================= */
 
   .transaction-form-header h1 {
     font-size: 30px;
+
+    line-height: 1.2;
   }
 
   .transaction-form-header p {
     font-size: 16px;
+
+    line-height: 1.45;
+
+    margin-top: 10px;
+
+    margin-bottom: 25px;
   }
+
+  /* =========================
+     DIVIDER
+  ========================= */
+
+  .form-divider {
+    margin-bottom: 30px;
+  }
+
+  /* =========================
+     LABEL
+  ========================= */
+
+  .form-group label {
+    font-size: 13px;
+
+    margin-bottom: 9px;
+  }
+
+  /* =========================
+     TITLE
+  ========================= */
+
+  .title-input {
+    height: 50px;
+
+    font-size: 16px;
+
+    padding: 0 12px;
+
+    margin-bottom: 25px;
+  }
+
+  /* =========================
+     ROW
+  ========================= */
 
   .form-row {
     flex-direction: column;
 
-    gap: 25px;
+    gap: 24px;
+
+    margin-bottom: 24px;
   }
 
   .form-row .form-group {
     width: 100%;
   }
 
+  /* =========================
+     EXPENSE / INCOME
+  ========================= */
+
+  .type-selector {
+    height: 52px;
+  }
+
+  .type-slider {
+    height: 42px;
+  }
+
+  .type-btn {
+    height: 42px;
+
+    font-size: 15px;
+
+    gap: 8px;
+  }
+
+  .type-arrow {
+    font-size: 18px;
+  }
+
+  /* =========================
+     AMOUNT
+  ========================= */
+
+  .amount-input-wrapper {
+    height: 52px;
+
+    padding: 0 12px;
+  }
+
+  .amount-input-wrapper input {
+    font-size: 16px;
+  }
+
+  /* =========================
+     CATEGORY
+  ========================= */
+
+  .category-dropdown {
+    width: 100%;
+  }
+
+  .category-selected {
+    width: 100%;
+
+    height: 52px;
+
+    font-size: 16px;
+
+    padding: 0 14px;
+  }
+
+  .category-menu {
+    max-height: 280px;
+  }
+
+  .category-option {
+    min-height: 42px;
+
+    font-size: 15px;
+  }
+
+  /* =========================
+     DATE
+  ========================= */
+
+  .date-input-wrapper {
+    height: 52px;
+  }
+
+  .date-input-wrapper input {
+    font-size: 16px;
+
+    padding: 0 12px;
+  }
+
+  /* =========================
+     NOTE
+  ========================= */
+
+  .note-group {
+    margin-top: 0;
+  }
+
+  .note-group textarea {
+    height: 120px;
+
+    font-size: 16px;
+
+    padding: 14px;
+  }
+
+  /* =========================
+     BOTTOM DIVIDER
+  ========================= */
+
+  .bottom-divider {
+    margin-top: 28px;
+
+    margin-bottom: 22px;
+  }
+
+  /* =========================
+     BUTTONS
+  ========================= */
+
   .form-actions {
-    gap: 25px;
+    width: 100%;
+
+    gap: 14px;
+
+    justify-content: space-between;
+  }
+
+  .cancel-btn {
+    flex: 0 0 auto;
+
+    font-size: 14px;
+
+    padding: 10px 8px;
   }
 
   .add-transaction-btn {
-    width: 190px;
+    width: auto;
+
+    min-width: 0;
+
+    flex: 1;
+
+    height: 48px;
+
+    font-size: 14px;
+  }
+
+  /* =========================
+     ERROR
+  ========================= */
+
+  .form-error {
+    font-size: 13px;
+
+    padding: 10px 12px;
   }
 }
 
@@ -996,23 +1409,105 @@
    ========================================================= */
 
 @media (max-width: 450px) {
+  .transaction-header {
+    padding: 0 15px;
+  }
+
+  .transaction-logo {
+    font-size: 23px;
+  }
+
   .transaction-form-wrapper {
     padding: 10px;
   }
 
   .transaction-form-card {
-    padding: 25px 18px;
+    padding: 24px 17px 26px;
+
+    border-radius: 11px;
   }
 
   .transaction-form-header h1 {
     font-size: 27px;
   }
 
+  .transaction-form-header p {
+    font-size: 15px;
+  }
+
+  .form-divider {
+    margin-bottom: 27px;
+  }
+
+  .title-input {
+    font-size: 16px;
+  }
+
+  .type-selector {
+    height: 50px;
+  }
+
+  .type-slider {
+    height: 40px;
+  }
+
+  .type-btn {
+    height: 40px;
+
+    font-size: 14px;
+  }
+
+  .category-selected {
+    height: 50px;
+
+    font-size: 16px;
+  }
+
+  .date-input-wrapper {
+    height: 50px;
+  }
+
+  .date-input-wrapper input {
+    font-size: 15px;
+  }
+
+  .note-group textarea {
+    height: 110px;
+
+    font-size: 15px;
+  }
+
   .form-actions {
-    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .cancel-btn {
+    font-size: 14px;
+
+    padding: 10px 5px;
   }
 
   .add-transaction-btn {
-    width: 175px;
+    height: 47px;
+
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   MOBILE MENU ANIMATION
+   ========================================================= */
+
+@keyframes mobileMenuSlide {
+  from {
+    opacity: 0;
+
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
   }
 }
