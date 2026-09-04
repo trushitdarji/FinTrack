@@ -1,0 +1,1018 @@
+/* =========================================================
+   FINTRACK NAVBAR
+   ========================================================= */
+
+.transaction-page {
+  min-height: 100vh;
+  background: #f7f8fd;
+  color: #10243b;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.transaction-header {
+  height: 90px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e8eaf0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 44px;
+
+  box-sizing: border-box;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+}
+
+/* ================= LOGO ================= */
+
+.transaction-logo {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 29px;
+
+  font-weight: 700;
+
+  color: #0c2d78;
+
+  flex-shrink: 0;
+}
+
+/* ================= NAVIGATION ================= */
+
+.transaction-nav {
+  display: flex;
+
+  align-items: center;
+
+  gap: 28px;
+
+  height: 100%;
+}
+
+.transaction-nav-link {
+  height: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  color: #4e515b;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  padding: 31px 0 13px;
+
+  cursor: pointer;
+
+  border-bottom: 2px solid transparent;
+
+  box-sizing: border-box;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.transaction-nav-link:hover {
+  color: #0b2e7c;
+}
+
+.transaction-nav-link.active {
+  color: #082c78;
+
+  font-weight: 700;
+
+  border-bottom-color: #082c78;
+}
+
+/* ================= RIGHT SIDE ================= */
+
+.transaction-nav-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 24px;
+}
+
+.transaction-icon-button {
+  width: 30px;
+
+  height: 30px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #0a2f7d;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  transition: transform 0.2s ease;
+}
+
+.transaction-icon-button:hover {
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   ADD TRANSACTION
+   ALL FONT = ARIAL
+   ========================================================= */
+
+.transaction-form-wrapper {
+  width: 100%;
+  min-height: calc(100vh - 90px);
+
+  background: #f5f7ff;
+
+  padding: 8px 43px 40px;
+
+  box-sizing: border-box;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: #10243b;
+}
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.transaction-form-card {
+  width: 100%;
+  max-width: 756px;
+
+  min-height: 772px;
+
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe1ed;
+
+  border-radius: 13px;
+
+  box-shadow: 0 7px 20px rgba(16, 36, 59, 0.07);
+
+  padding: 38px 36px 34px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.transaction-form-header h1 {
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 36px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #07377e;
+}
+
+.transaction-form-header p {
+  margin: 12px 0 29px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  line-height: 1.4;
+
+  color: #193d67;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.form-divider {
+  width: 100%;
+
+  height: 1px;
+
+  background: #c6ccd8;
+
+  margin-bottom: 37px;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.form-error {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 11px 14px;
+
+  margin-bottom: 20px;
+
+  border-radius: 7px;
+
+  background: #fff0f0;
+
+  border: 1px solid #f2bcbc;
+
+  color: #c40000;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 11px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  color: #10243b;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.title-input {
+  width: 100%;
+
+  height: 52px;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  border-bottom: 1px solid #6f7784;
+
+  border-radius: 0 0 10px 10px;
+
+  outline: none;
+
+  padding: 0 17px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  color: #10243b;
+
+  background: #ffffff;
+
+  margin-bottom: 28px;
+}
+
+.title-input::placeholder {
+  color: #66768c;
+
+  opacity: 1;
+}
+
+.title-input:focus {
+  border-bottom: 2px solid #173f91;
+}
+
+/* =========================================================
+   ROW
+   ========================================================= */
+
+.form-row {
+  display: flex;
+
+  gap: 27px;
+
+  width: 100%;
+
+  margin-bottom: 29px;
+}
+
+.form-row .form-group {
+  width: 50%;
+}
+
+/* =========================================================
+   EXPENSE / INCOME SELECTOR
+   ========================================================= */
+
+.type-selector {
+  width: 100%;
+
+  height: 52px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  background: #eef2fa;
+
+  border: 1px solid #bec7d9;
+
+  border-radius: 9px;
+
+  padding: 4px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   SLIDING WHITE BOX
+   ========================================================= */
+
+.type-slider {
+  position: absolute;
+
+  top: 4px;
+
+  left: 4px;
+
+  width: calc(50% - 4px);
+
+  height: 42px;
+
+  background: #ffffff;
+
+  border-radius: 7px;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+
+  z-index: 0;
+
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Expense = LEFT */
+
+.slider-expense {
+  transform: translateX(0);
+}
+
+/* Income = RIGHT */
+
+.slider-income {
+  transform: translateX(100%);
+}
+
+/* =========================================================
+   TYPE BUTTON
+   ========================================================= */
+
+.type-btn {
+  position: relative;
+
+  z-index: 1;
+
+  flex: 1;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  transition: color 0.25s ease;
+}
+
+/* Default */
+
+.type-btn {
+  color: #10243b;
+}
+
+/* Active Expense */
+
+.type-btn.expense-selected {
+  color: #d00000;
+}
+
+/* Active Income */
+
+.type-btn.income-selected {
+  color: #16833b;
+}
+
+/* Arrow */
+
+.type-arrow {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 20px;
+
+  line-height: 1;
+}
+
+/* =========================================================
+   AMOUNT
+   ========================================================= */
+
+.amount-input-wrapper {
+  width: 100%;
+
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  border-bottom: 1px solid #6f7784;
+
+  border-radius: 0 0 10px 10px;
+
+  box-sizing: border-box;
+
+  padding: 0 17px;
+}
+
+.amount-input-wrapper:focus-within {
+  border-bottom: 2px solid #173f91;
+}
+
+.currency {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+
+  margin-right: 10px;
+
+  color: #10243b;
+}
+
+.amount-input-wrapper input {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+
+  color: #10243b;
+
+  text-align: right;
+}
+
+.amount-input-wrapper input::placeholder {
+  color: #61738b;
+
+  opacity: 1;
+}
+
+/* Remove number arrows */
+
+.amount-input-wrapper input::-webkit-outer-spin-button,
+.amount-input-wrapper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+
+  margin: 0;
+}
+
+.amount-input-wrapper input[type="number"] {
+  appearance: textfield;
+
+  -moz-appearance: textfield;
+}
+
+/* =========================================================
+   CATEGORY DROPDOWN
+   ========================================================= */
+
+.category-dropdown {
+  width: 100%;
+
+  position: relative;
+}
+
+/* =========================================================
+   SELECTED CATEGORY
+   ========================================================= */
+
+.category-selected {
+  width: 100%;
+
+  height: 56px;
+
+  padding: 0 17px;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 9px;
+
+  background: #eff3f8;
+
+  color: #10243b;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.category-selected:hover {
+  background: #e9eef6;
+}
+
+/* =========================================================
+   CSS CHEVRON
+   ========================================================= */
+
+/*
+   We are NOT using ⌄ anymore.
+
+   This is a single CSS chevron.
+   It stays in exactly the same position
+   and rotates smoothly.
+*/
+
+.category-chevron {
+  width: 9px;
+
+  height: 9px;
+
+  border-right: 2px solid #42536a;
+
+  border-bottom: 2px solid #42536a;
+
+  transform: rotate(45deg);
+
+  position: relative;
+
+  top: -3px;
+
+  transition: transform 0.25s ease;
+}
+
+/* Open */
+
+.category-chevron.chevron-up {
+  transform: rotate(225deg);
+
+  top: 3px;
+}
+
+/* =========================================================
+   CATEGORY MENU
+   ========================================================= */
+
+.category-menu {
+  position: absolute;
+
+  top: calc(100% + 7px);
+
+  left: 0;
+
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe1ed;
+
+  border-radius: 9px;
+
+  box-shadow: 0 8px 22px rgba(16, 36, 59, 0.12);
+
+  padding: 6px;
+
+  box-sizing: border-box;
+
+  z-index: 20;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translateY(-8px) scaleY(0.96);
+
+  transform-origin: top;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+
+  max-height: 0;
+
+  overflow: hidden;
+}
+
+/* OPEN */
+
+.category-menu-open {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateY(0) scaleY(1);
+
+  max-height: 320px;
+
+  overflow-y: auto;
+}
+
+/* =========================================================
+   CATEGORY OPTION
+   ========================================================= */
+
+.category-option {
+  width: 100%;
+
+  min-height: 42px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  padding: 0 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+
+  color: #10243b;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.category-option:hover {
+  background: #f0f4fa;
+
+  color: #173f91;
+}
+
+/* Selected */
+
+.category-option.selected-category {
+  background: #edf2fa;
+
+  color: #173f91;
+
+  font-weight: 600;
+}
+
+/* Check */
+
+.category-check {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+
+  color: #173f91;
+}
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.date-input-wrapper {
+  width: 100%;
+
+  height: 52px;
+
+  border-bottom: 1px solid #6f7784;
+
+  border-radius: 0 0 10px 10px;
+
+  box-sizing: border-box;
+}
+
+.date-input-wrapper input {
+  width: 100%;
+
+  height: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  padding: 0 17px;
+
+  box-sizing: border-box;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  color: #10243b;
+}
+
+.date-input-wrapper:focus-within {
+  border-bottom: 2px solid #173f91;
+}
+
+/* =========================================================
+   NOTE
+   ========================================================= */
+
+.note-group {
+  margin-top: -1px;
+}
+
+.note-group label {
+  margin-bottom: 10px;
+}
+
+.note-group textarea {
+  width: 100%;
+
+  height: 110px;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  outline: none;
+
+  resize: none;
+
+  border-radius: 9px;
+
+  background: #eff3f8;
+
+  padding: 16px 17px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  color: #10243b;
+}
+
+.note-group textarea::placeholder {
+  color: #66768c;
+
+  opacity: 1;
+}
+
+.note-group textarea:focus {
+  box-shadow: inset 0 0 0 1px #c1cbd9;
+}
+
+/* =========================================================
+   BOTTOM DIVIDER
+   ========================================================= */
+
+.bottom-divider {
+  margin-top: 33px;
+
+  margin-bottom: 26px;
+}
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.form-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 43px;
+}
+
+.cancel-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #10243b;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  padding: 10px 0;
+}
+
+.cancel-btn:hover {
+  color: #173f91;
+}
+
+.cancel-btn:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   ADD TRANSACTION BUTTON
+   ========================================================= */
+
+.add-transaction-btn {
+  width: 202px;
+
+  height: 49px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #24449a;
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.add-transaction-btn:hover {
+  background: #193b8d;
+
+  transform: translateY(-1px);
+}
+
+.add-transaction-btn:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+.plus-icon {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  line-height: 1;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .transaction-form-wrapper {
+    padding: 15px;
+  }
+
+  .transaction-form-card {
+    padding: 28px 22px;
+  }
+
+  .transaction-form-header h1 {
+    font-size: 30px;
+  }
+
+  .transaction-form-header p {
+    font-size: 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+
+    gap: 25px;
+  }
+
+  .form-row .form-group {
+    width: 100%;
+  }
+
+  .form-actions {
+    gap: 25px;
+  }
+
+  .add-transaction-btn {
+    width: 190px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+  .transaction-form-wrapper {
+    padding: 10px;
+  }
+
+  .transaction-form-card {
+    padding: 25px 18px;
+  }
+
+  .transaction-form-header h1 {
+    font-size: 27px;
+  }
+
+  .form-actions {
+    justify-content: space-between;
+  }
+
+  .add-transaction-btn {
+    width: 175px;
+  }
+}

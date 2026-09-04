@@ -845,6 +845,23 @@ const Transaction = () => {
   // RETURN UI
   // ================================
 
+  const formatTransactionDate = (date) => {
+    if (!date) return "";
+
+    const parsedDate = new Date(date);
+
+    if (Number.isNaN(parsedDate.getTime())) {
+      return date;
+    }
+
+    return parsedDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+  };
+
   return (
     <div className="transaction-page">
       {/* ================= HEADER ================= */}
@@ -863,7 +880,7 @@ const Transaction = () => {
           <button className="transaction-nav-link active">Transactions</button>
 
           <button
-            onClick={() => navigate("/transaction/add")}
+            onClick={() => navigate("/add-transaction")}
             className="transaction-nav-link"
           >
             Add-Transaction
@@ -899,7 +916,7 @@ const Transaction = () => {
 
           <button
             className="new-transaction-button"
-            onClick={() => navigate("/transaction/add")}
+            onClick={() => navigate("/add-transaction")}
           >
             <Plus size={22} />
             <span>New Transaction</span>
@@ -910,7 +927,7 @@ const Transaction = () => {
 
         <button
           className="mobile-add-transaction"
-          onClick={() => navigate("/transaction/add")}
+          onClick={() => navigate("/add-transaction")}
         >
           <Plus size={20} />
           Add Transaction
@@ -1065,7 +1082,9 @@ const Transaction = () => {
                       {isIncome ? "Income" : "Expense"}
                     </span>
 
-                    <span className="transaction-date">{transaction.date}</span>
+                    <span className="transaction-date">
+                      {formatTransactionDate(transaction.date)}
+                    </span>
                   </div>
 
                   {/* TITLE */}
