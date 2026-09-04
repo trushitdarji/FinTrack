@@ -1,335 +1,120 @@
-# FinTrack
+# FinTrack — Backend API
 
-# 💰 FinTrack Backend API
+FinTrack Backend is a RESTful API for a personal finance management application.
 
-A production-ready RESTful Backend API for an Expense Tracker application built with **Node.js, Express.js, MongoDB, and JWT Authentication**.
-
-This project allows users to securely manage their personal finances by creating, updating, deleting, searching, filtering, sorting, and analyzing their transactions.
+It handles user authentication, transaction management, dashboard analytics, password management, password recovery through email, and API security.
 
 ---
 
-# 🚀 Features
+## 🚀 Features
 
-## 🔐 Authentication
+### 🔐 Authentication & Authorization
 
-* User Registration
-* User Login
-* JWT Authentication
-* Password Hashing using Bcrypt
-* Protected Routes
-* Get Current User
-* Change Password
+- User Registration
+- User Login
+- User Logout
+- JWT-based authentication
+- HTTP cookie-based authentication
+- Protected routes
+- Get current logged-in user
+- Change password
 
----
+### 🔑 Password Recovery
 
-## 💳 Transaction Management
+- Forgot password functionality
+- Secure password reset token generation
+- Password reset through email
+- Reset token expiration
+- One-time token invalidation after successful reset
+- Generic forgot-password response to prevent email enumeration
+- Rate limiting for password reset requests
 
-* Create Transaction
-* Fetch All Transactions
-* Update Transaction
-* Delete Transaction
+### 💰 Transaction Management
 
----
+- Create transactions
+- Get transactions
+- Get single transaction
+- Update transactions
+- Delete transactions
+- Income and Expense support
+- Categories
+- Notes
+- Transaction date
+- Pagination
+- Search
+- Filtering
+- Sorting
 
-## 📄 Pagination
+### 📊 Dashboard
 
-Supports pagination using query parameters.
+The backend provides financial summary APIs for:
 
-Example:
-
-```
-GET /api/transaction?page=1&limit=10
-```
-
----
-
-## 🔍 Search
-
-Search transactions by title using MongoDB Regular Expressions.
-
-Example:
-
-```
-GET /api/transaction?search=food
-```
-
----
-
-## 🔃 Sorting
-
-Sort transactions by creation date.
-
-Ascending:
-
-```
-GET /api/transaction?sort=asc
-```
-
-Descending:
-
-```
-GET /api/transaction?sort=desc
-```
+- Total Income
+- Total Expenses
+- Current Balance
+- Total Transactions
+- Recent 5 Transactions
+- Income/Expense statistics
 
 ---
 
-## 🎯 Filtering
+## 🛠️ Tech Stack
 
-Filter transactions by:
+### Backend
 
-* Type
-* Category
-
-Example:
-
-```
-GET /api/transaction?type=income
-
-GET /api/transaction?category=Food
-```
-
-You can also combine filters.
-
-Example:
-
-```
-GET /api/transaction?page=1&limit=5&sort=desc&type=income&category=Other
-```
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+- Zod
+- Nodemailer
+- Express Rate Limit
+- Cookie Parser
+- CORS
+- dotenv
 
 ---
 
-# 📊 Dashboard APIs
+## 📂 Project Structure
 
-## Dashboard Summary
-
-Returns:
-
-* Total Income
-* Total Expense
-* Current Balance
-* Total Transactions
-
----
-
-## Recent Transactions
-
-Returns latest 5 transactions.
-
----
-
-## Dashboard Statistics
-
-Uses MongoDB Aggregation Pipeline.
-
-Returns:
-
-* Total Income
-* Total Expense
-* Current Balance
-
----
-
-# 🛠️ Tech Stack
-
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-* JWT
-* Bcrypt
-* Cookie Parser
-* dotenv
-* Zod Validation
-
----
-
-# 📁 Folder Structure
-
-```
-src/
+```text
+Backend/
+├── src/
+│   ├── config/
+│   │   └── database.js
+│   │
+│   ├── controller/
+│   │   ├── auth.controller.js
+│   │   ├── dashboard.controller.js
+│   │   └── transaction.controller.js
+│   │
+│   ├── middleware/
+│   │   ├── auth.middleware.js
+│   │   ├── auth.rateLimiter.js
+│   │   ├── error.middleware.js
+│   │   └── validate.middleware.js
+│   │
+│   ├── model/
+│   │   ├── user.model.js
+│   │   └── transaction.model.js
+│   │
+│   ├── routes/
+│   │   ├── auth.routes.js
+│   │   ├── dashboard.route.js
+│   │   └── transaction.route.js
+│   │
+│   ├── utils/
+│   │   └── email.service.js
+│   │
+│   ├── validation/
+│   │   ├── auth.validation.js
+│   │   └── transaction.validation.js
+│   │
+│   └── app.js
 │
-├── config/
-│
-├── controllers/
-│
-├── middlewares/
-│
-├── models/
-│
-├── routes/
-│
-├── validators/
-│
-├── utils/
-│
-├── app.js
-│
-└── server.js
+├── server.js
+├── package.json
+└── README.md
 ```
-
----
-
-# 📌 API Endpoints
-
-## Authentication
-
-| Method | Endpoint                  | Description      |
-| ------ | ------------------------- | ---------------- |
-| POST   | /api/auth/register        | Register User    |
-| POST   | /api/auth/login           | Login User       |
-| GET    | /api/auth/me              | Get Current User |
-| PUT    | /api/auth/change-password | Change Password  |
-
----
-
-## Transactions
-
-| Method | Endpoint          | Description        |
-| ------ | ----------------- | ------------------ |
-| POST   | /api/transaction  | Create Transaction |
-| GET    | /api/transaction  | Get Transactions   |
-| PUT    | /api/transaction/ | Update Transaction |
-| DELETE | /api/transaction/ | Delete Transaction |
-
----
-
-## Dashboard
-
-| Method | Endpoint               | Description          |
-| ------ | ---------------------- | -------------------- |
-| GET    | /api/dashboard/summary | Dashboard Summary    |
-| GET    | /api/dashboard/recent  | Recent Transactions  |
-| GET    | /api/dashboard/stats   | Dashboard Statistics |
-
----
-
-# 🔐 Authentication
-
-Protected routes require a valid JWT token.
-
-Authorization Header
-
-```
-Authorization: Bearer YOUR_JWT_TOKEN
-```
-
----
-
-# ⚙️ Environment Variables
-
-Create a `.env` file inside the project root.
-
-```
-PORT=3000
-
-MONGO_URI=your_mongodb_connection_string
-
-JWT_SECRET=your_super_secret_key
-```
-
----
-
-# ▶️ Installation
-
-Clone the repository
-
-```
-git clone <repository-url>
-```
-
-Move into project
-
-```
-cd fintrack-backend
-```
-
-Install dependencies
-
-```
-npm install
-```
-
-Create `.env`
-
-```
-PORT=3000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-```
-
-Run development server
-
-```
-npm run dev
-```
-
----
-
-# 📦 Dependencies
-
-* express
-* mongoose
-* bcrypt
-* jsonwebtoken
-* cookie-parser
-* dotenv
-* zod
-* cors
-* nodemon
-
----
-
-# 🧪 Testing
-
-The API has been manually tested using:
-
-* Postman
-* Thunder Client
-
----
-
-# 📚 Concepts Implemented
-
-* REST API Design
-* MVC Architecture
-* Authentication & Authorization
-* JWT
-* Password Hashing
-* CRUD Operations
-* MongoDB Queries
-* Pagination
-* Search using Regular Expressions
-* Sorting
-* Filtering
-* MongoDB Aggregation Pipeline
-* Error Handling Middleware
-* Request Validation
-* Protected Routes
-* Environment Variables
-
----
-
-# 🚧 Upcoming Features
-
-* React Frontend
-* Full Stack Deployment
-* API Documentation
-* CSV Export
-* Monthly Analytics
-* Charts & Reports
-
----
-
-# 👨‍💻 Author
-
-**Trushit Darji**
-
-Backend Developer | MERN Stack Learner | Building Real-World Projects
-
-GitHub: https://github.com/your-github-trushitdarji
-
----
-
-# ⭐ Support
-
-If you found this project helpful, consider giving it a ⭐ on GitHub.

@@ -1,16 +1,129 @@
-# React + Vite
+# FinTrack — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+FinTrack is a modern and responsive personal finance management application that helps users manage their income, expenses, and overall financial activity.
 
-Currently, two official plugins are available:
+This repository contains the frontend of the FinTrack application, built with React and Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔐 Authentication
 
-## Expanding the Oxlint configuration
+- User Registration
+- User Login
+- User Logout
+- Protected Routes
+- Get Current User
+- Change Password
+- Forgot Password
+- Reset Password
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### 💰 Transaction Management
+
+- Add new transactions
+- Edit existing transactions
+- Delete transactions
+- View transaction details
+- Income and Expense tracking
+- Transaction categories
+- Transaction notes
+- Transaction dates
+
+### 🔎 Search, Filter & Sort
+
+- Search transactions by title
+- Filter by transaction type
+- Filter by category
+- Filter by date range
+- Sort transactions
+- Pagination
+
+### 📊 Dashboard
+
+- Total Income
+- Total Expenses
+- Current Balance
+- Total Transactions
+- Recent Transactions
+- Financial Overview
+- Financial Health visualization
+
+### 👤 Profile
+
+- View user profile
+- Change password
+- Logout
+
+### 📱 Responsive Design
+
+FinTrack provides a responsive interface for:
+
+- Desktop
+- Tablet
+- Mobile devices
+
+The mobile interface includes a responsive navigation menu and optimized transaction/dashboard layouts.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- React Router
+- Axios
+- Lucide React
+- CSS
+- Tailwind CSS / Tailwind Vite tooling
+
+### Backend
+
+The frontend communicates with the FinTrack REST API built using:
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+
+---
+
+## 📂 Project Structure
+
+```text
+Frontend/
+├── public/
+├── src/
+│   ├── api/
+│   │
+│   ├── components/
+│   │   ├── Button.jsx
+│   │   ├── Card.jsx
+│   │   ├── FinancialOverview.jsx
+│   │   ├── Input.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   └── RecentTransactions.jsx
+│   │
+│   ├── pages/
+│   │   ├── AddTransaction.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── EditTransaction.jsx
+│   │   ├── ForgotPassword.jsx
+│   │   ├── Login.jsx
+│   │   ├── NotFound.jsx
+│   │   ├── Profile.jsx
+│   │   ├── Register.jsx
+│   │   ├── ResetPassword.jsx
+│   │   └── Transactions.jsx
+│   │
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+│
+├── package.json
+└── README.md
+```
