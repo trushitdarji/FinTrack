@@ -240,7 +240,7 @@ const Login = () => {
                   type="button"
                   className="forgot-password"
                   onClick={() => {
-                    setSupportOpen(true);
+                    navigate("/forgot-password")
                   }}
                 >
                   Forgot password?

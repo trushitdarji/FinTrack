@@ -220,7 +220,7 @@ async function ForgotPasswordController(req, res, next) {
     await user.save();
 
     // Frontend reset page
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
     await sendResetEmail(user.email, resetLink);
 

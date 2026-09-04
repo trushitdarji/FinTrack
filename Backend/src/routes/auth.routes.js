@@ -1,6 +1,7 @@
 import express from "express";
 import authController from "../controller/auth.controller.js";
 import authMiddleware from "../middleware/auth.middleware.js";
+import forgotPasswordLimiter from "../middleware/auth.rateLimiter.js";
 
 const authRoute = express.Router();
 
@@ -13,7 +14,11 @@ authRoute.post(
   authMiddleware,
   authController.ChangePasswordController,
 );
-authRoute.post("/forgot-password", authController.ForgotPasswordController);
+authRoute.post(
+  "/forgot-password",
+  forgotPasswordLimiter,
+  authController.ForgotPasswordController,
+);
 authRoute.post(
   "/reset-password/:token",
   authController.ResetPasswordController,
