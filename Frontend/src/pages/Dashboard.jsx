@@ -533,6 +533,18 @@ const Dashboard = () => {
                   <span>Transactions</span>
                 </a>
 
+                {/* Add-Transaction */}
+
+                <a
+                  href="/add-transaction"
+                  className="mobile-sidebar-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <ReceiptText size={21} />
+
+                  <span>Add-Transactions</span>
+                </a>
+
                 {/* Profile */}
 
                 <a

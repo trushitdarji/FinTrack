@@ -464,7 +464,7 @@
 }
 
 .transaction-page .expense-amount {
-  color: #10243b;
+  color: #bb202f;
 }
 
 /* =========================================================
@@ -959,28 +959,58 @@
 
   .transaction-page .transaction-card {
     min-width: 0;
+    min-height: 0;
+    height: auto;
 
-    padding: 16px;
-
+    padding: 14px;
     border-radius: 11px;
-
     box-sizing: border-box;
   }
 
-  .transaction-page .transaction-card-title {
-    font-size: 18px;
+  /* ================= MOBILE CARD ORDER ================= */
 
+  .transaction-page .transaction-card-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  .transaction-page .transaction-date {
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .transaction-page .transaction-type {
+    font-size: 12px;
+    padding: 6px 10px;
+    gap: 5px;
+  }
+
+  .transaction-page .transaction-card-title {
+    margin: 0 0 6px;
+
+    font-size: 17px;
     line-height: 1.25;
 
     word-break: break-word;
   }
 
   .transaction-page .transaction-category {
+    margin: 0;
     font-size: 12px;
   }
 
   .transaction-page .transaction-amount {
-    font-size: 29px;
+    margin-top: 18px;
+    margin-bottom: 16px;
+
+    font-size: 25px;
+    line-height: 1.1;
 
     word-break: break-word;
   }
@@ -995,75 +1025,114 @@
 
   /* ================= PAGINATION ================= */
 
-  .transaction-page .transaction-pagination {
-    margin-top: 20px;
+  /* ================= PAGINATION ================= */
 
-    padding: 0 10px;
+  .transaction-page .transaction-pagination {
+    width: 100%;
+    min-height: 76px;
+
+    margin-top: 20px;
+    padding: 12px;
 
     box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    background: #ffffff;
+    border: 1px solid #e8e8eb;
+    border-radius: 11px;
+  }
+
+  /* PREVIOUS + NEXT */
+
+  .transaction-page .pagination-button {
+    flex: 0 0 auto;
+
+    width: auto;
+    min-width: 105px;
+    height: 46px;
+
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    box-sizing: border-box;
+
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* PAGE NUMBER */
+
+  .transaction-page .pagination-info {
+    flex: 1;
+
+    min-width: 0;
+
+    text-align: center;
+
+    font-size: 13px;
+    line-height: 1.2;
+
+    white-space: nowrap;
   }
 }
 
 /* =========================================================
    VERY SMALL MOBILE
 ========================================================= */
-
 @media (max-width: 400px) {
-  .transaction-page .transaction-main {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .transaction-page .transaction-filters {
+  .transaction-page .transaction-card {
     padding: 12px;
-
-    gap: 10px;
+    min-height: 0;
+    height: auto;
   }
 
-  .transaction-page .transaction-grid {
-    gap: 10px;
+  .transaction-page .transaction-type {
+    font-size: 11px;
+    padding: 5px 8px;
   }
 
-  .transaction-page .transaction-card {
-    padding: 13px;
-  }
-
-  .transaction-page .transaction-card-title {
-    font-size: 16px;
-  }
-
-  .transaction-page .transaction-amount {
-    font-size: 25px;
-  }
-}
-@media (max-width: 400px) {
-  .transaction-page .transaction-main {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .transaction-page .transaction-grid {
-    gap: 10px;
-  }
-
-  .transaction-page .transaction-card {
-    padding: 13px;
+  .transaction-page .transaction-date {
+    font-size: 11px;
   }
 
   .transaction-page .transaction-card-title {
     font-size: 16px;
   }
 
-  .transaction-page .transaction-amount {
-    font-size: 25px;
+  .transaction-page .transaction-category {
+    font-size: 11px;
   }
 
-  .transaction-page .transaction-description {
-    font-size: 12px;
+  .transaction-page .transaction-amount {
+    font-size: 23px;
+    margin-top: 16px;
+    margin-bottom: 14px;
   }
 
   .transaction-page .transaction-edit-button,
   .transaction-page .transaction-delete-button {
+    font-size: 12px;
+    height: 42px;
+  }
+
+  .transaction-page .pagination-button {
+    min-width: 92px;
+    height: 44px;
+    padding: 0 8px;
+    font-size: 13px;
+  }
+
+  .transaction-page .pagination-info {
     font-size: 12px;
   }
 }

@@ -1134,9 +1134,9 @@ const Transaction = () => {
                       }
                     >
                       {isIncome ? (
-                        <ArrowDown size={17} />
-                      ) : (
                         <ArrowUp size={17} />
+                      ) : (
+                        <ArrowDown size={17} />
                       )}
 
                       {isIncome ? "Income" : "Expense"}
