@@ -6,13 +6,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
       minlength: [3, "Username must be at least 3 characters long."],
-      maxlength:[30,"You can enter only 15 character in username"],
+      maxlength: [30, "You can enter only 15 character in username"],
       required: true,
     },
     email: {
       type: String,
       required: [true, "email is required"],
-      unique:true,
+      unique: true,
       lowercase: true,
       trim: true,
       match: [
@@ -24,6 +24,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: [6, "password must be 6 characters long"],
+    },
+
+    resetPasswordToken: {
+      type: String,
+      default: null,
+    },
+
+    resetPasswordExpires: {
+      type: Date,
+      default: null,
     },
   },
   {

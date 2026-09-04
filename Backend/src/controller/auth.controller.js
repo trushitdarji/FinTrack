@@ -1,6 +1,8 @@
 import userModel from "../model/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import { sendResetEmail } from "../utils/email.service.js";
 
 async function RegisterController(req, res, next) {
   try {
@@ -178,10 +180,128 @@ async function ChangePasswordController(req, res, next) {
   }
 }
 
+async function ForgotPasswordController(req, res, next) {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
+
+    const user = await userModel.findOne({ email });
+
+    // Security: don't reveal whether email exists
+    if (!user) {
+      return res.status(200).json({
+        success: true,
+        message:
+          "If an account exists with this email, a password reset link has been sent.",
+      });
+    }
+
+    // Generate random reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    // Hash token before storing it in database
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    // Token expires after 15 minutes
+    const resetTokenExpires = new Date(Date.now() + 15 * 60 * 1000);
+
+    user.resetPasswordToken = hashedToken;
+    user.resetPasswordExpires = resetTokenExpires;
+
+    await user.save();
+
+    // Frontend reset page
+    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+
+    await sendResetEmail(user.email, resetLink);
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "If an account exists with this email, a password reset link has been sent.",
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function ResetPasswordController(req, res, next) {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: "Reset token is required",
+      });
+    }
+
+    if (!newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "New password is required",
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "New password must be at least 6 characters",
+      });
+    }
+
+    // Hash the token received from URL
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    // Find user with valid token
+    const user = await userModel.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpires: { $gt: new Date() },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired reset token",
+      });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    user.password = hashedPassword;
+
+    // Remove reset token after successful password reset
+    user.resetPasswordToken = null;
+    user.resetPasswordExpires = null;
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password reset successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 export default {
   RegisterController,
   LoginController,
   LogoutController,
   GetMeController,
   ChangePasswordController,
+  ForgotPasswordController,
+  ResetPasswordController,
 };

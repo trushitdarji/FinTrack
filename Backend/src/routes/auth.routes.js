@@ -13,5 +13,10 @@ authRoute.post(
   authMiddleware,
   authController.ChangePasswordController,
 );
+authRoute.post("/forgot-password", authController.ForgotPasswordController);
+authRoute.post(
+  "/reset-password/:token",
+  authController.ResetPasswordController,
+);
 
 export default authRoute;
